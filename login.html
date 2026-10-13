@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — QuickBuy Smart Shopping</title>
+  <meta name="description" content="Sign in to your QuickBuy account to access your saved wishlist, personalized smart picks, and express checkout.">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Bootstrap Icons 1.11.3 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Floating Navigation -->
+  <header class="position-absolute top-0 start-0 end-0 p-3 p-md-4 z-3">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a href="index.html" class="btn btn-sm btn-outline-purple d-inline-flex align-items-center gap-2">
+        <i class="bi bi-arrow-left"></i>
+        <span>Back to Store</span>
+      </a>
+
+      <!-- Theme Toggle Button -->
+      <button class="nav-icon-btn" id="themeToggleBtn" title="Toggle Theme" aria-label="Toggle Theme">
+        <i class="bi bi-moon-stars-fill text-purple" id="themeToggleIcon"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Authentication Wrapper -->
+  <main class="auth-wrapper">
+    <div class="hero-glow-1"></div>
+    <div class="hero-glow-2"></div>
+
+    <div class="auth-card">
+      <!-- Brand Logo -->
+      <div class="text-center mb-4">
+        <a href="index.html" class="auth-brand-logo">
+          <span class="brand-icon-box">
+            <i class="bi bi-bag-check-fill"></i>
+          </span>
+          <span>Quick<span class="text-purple">Buy</span></span>
+        </a>
+        <h3 class="fw-bold mb-1">Welcome Back</h3>
+        <p class="text-muted small">Sign in to your account to continue shopping</p>
+      </div>
+
+      <!-- Quick Demo Credentials Box -->
+      <div class="alert alert-secondary border py-2 px-3 small mb-4 d-flex justify-content-between align-items-center">
+        <div>
+          <i class="bi bi-stars text-purple me-1"></i>
+          <span>Demo: <strong>student@quickbuy.demo</strong></span>
+        </div>
+        <button type="button" class="btn btn-sm btn-purple py-0 px-2" style="font-size: 0.75rem;" onclick="fillDemoCredentials()">
+          Auto Fill
+        </button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" novalidate>
+        <!-- Alert feedback -->
+        <div id="loginAlertBox" class="d-none alert alert-danger py-2 px-3 small mb-3"></div>
+
+        <!-- Email Field -->
+        <div class="mb-3">
+          <label for="loginEmail" class="form-label">Email Address</label>
+          <div class="auth-input-group">
+            <i class="bi bi-envelope auth-input-icon"></i>
+            <input type="email" class="form-control auth-input" id="loginEmail" placeholder="name@example.com" required autocomplete="email">
+          </div>
+        </div>
+
+        <!-- Password Field -->
+        <div class="mb-3">
+          <div class="d-flex justify-content-between align-items-center mb-1">
+            <label for="loginPassword" class="form-label mb-0">Password</label>
+            <a href="javascript:void(0)" class="small text-purple" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">
+              Forgot password?
+            </a>
+          </div>
+          <div class="auth-input-group">
+            <i class="bi bi-lock auth-input-icon"></i>
+            <input type="password" class="form-control auth-input pe-5" id="loginPassword" placeholder="Enter your password" required autocomplete="current-password">
+            <button type="button" class="auth-password-toggle" id="togglePasswordBtn" aria-label="Toggle password visibility">
+              <i class="bi bi-eye" id="togglePasswordIcon"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Remember Me Checkbox -->
+        <div class="form-check mb-4">
+          <input class="form-check-input" type="checkbox" id="rememberMeCheckbox" checked>
+          <label class="form-check-label small text-muted" for="rememberMeCheckbox">
+            Remember me on this browser
+          </label>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-purple w-100 py-2 fw-bold mb-3 shadow-sm" id="submitLoginBtn">
+          <i class="bi bi-box-arrow-in-right me-1"></i> Sign In
+        </button>
+      </form>
+
+      <!-- Divider -->
+      <div class="auth-divider">or new to QuickBuy?</div>
+
+      <!-- Register Link -->
+      <div class="text-center">
+        <a href="register.html" class="btn btn-outline-purple w-100 py-2 fw-bold">
+          <i class="bi bi-person-plus me-1"></i> Create an Account
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       FORGOT PASSWORD SIMULATION MODAL
+       ======================================================================== -->
+  <div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold" id="forgotPasswordModalLabel">
+            <i class="bi bi-key-fill text-purple me-1"></i> Reset Password
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="forgotPasswordForm">
+          <div class="modal-body p-4">
+            <p class="text-muted small mb-3">
+              Enter your registered email address and we will simulate sending a password reset link to your inbox.
+            </p>
+            <div class="mb-3">
+              <label for="resetEmail" class="form-label">Email Address</label>
+              <input type="email" class="form-control" id="resetEmail" placeholder="name@example.com" required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-purple btn-sm px-3 fw-bold">
+              Send Reset Link
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toastContainer"></div>
+
+  <!-- Bootstrap 5.3.3 Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Login Logic Script -->
+  <script>
+    // Theme initialization
+    const savedTheme = localStorage.getItem("quickbuy_theme");
+    const systemPrefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    let currentTheme = savedTheme ? savedTheme : (systemPrefersDark ? "dark" : "light");
+    document.documentElement.setAttribute("data-bs-theme", currentTheme);
+
+    const themeToggleBtn = document.getElementById("themeToggleBtn");
+    const themeIcon = document.getElementById("themeToggleIcon");
+    if (themeIcon) {
+      themeIcon.className = currentTheme === "dark" ? "bi bi-sun-fill text-warning" : "bi bi-moon-stars-fill text-purple";
+    }
+
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener("click", () => {
+        currentTheme = currentTheme === "light" ? "dark" : "light";
+        localStorage.setItem("quickbuy_theme", currentTheme);
+        document.documentElement.setAttribute("data-bs-theme", currentTheme);
+        if (themeIcon) {
+          themeIcon.className = currentTheme === "dark" ? "bi bi-sun-fill text-warning" : "bi bi-moon-stars-fill text-purple";
+        }
+      });
+    }
+
+    // Toast helper
+    function showToast(message, type = "info") {
+      const container = document.getElementById("toastContainer");
+      if (!container) return;
+      const borderClass = type === "success" ? "border-success text-success" : type === "danger" ? "border-danger text-danger" : "border-purple text-purple";
+      const iconClass = type === "success" ? "bi-check-circle-fill text-success" : type === "danger" ? "bi-exclamation-octagon-fill text-danger" : "bi-info-circle-fill text-purple";
+      
+      const toastEl = document.createElement("div");
+      toastEl.className = `toast align-items-center custom-toast ${borderClass} border-2 show mb-2`;
+      toastEl.innerHTML = `
+        <div class="d-flex">
+          <div class="toast-body d-flex align-items-center gap-2">
+            <i class="bi ${iconClass} fs-5"></i>
+            <span>${message}</span>
+          </div>
+          <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>
+      `;
+      container.appendChild(toastEl);
+      setTimeout(() => {
+        toastEl.classList.remove("show");
+        setTimeout(() => toastEl.remove(), 300);
+      }, 3500);
+    }
+
+    // Toggle Password Visibility
+    const togglePasswordBtn = document.getElementById("togglePasswordBtn");
+    const passwordInput = document.getElementById("loginPassword");
+    const togglePasswordIcon = document.getElementById("togglePasswordIcon");
+
+    if (togglePasswordBtn && passwordInput && togglePasswordIcon) {
+      togglePasswordBtn.addEventListener("click", () => {
+        const isPassword = passwordInput.getAttribute("type") === "password";
+        passwordInput.setAttribute("type", isPassword ? "text" : "password");
+        togglePasswordIcon.className = isPassword ? "bi bi-eye-slash" : "bi bi-eye";
+      });
+    }
+
+    // Auto-fill Demo Credentials
+    function fillDemoCredentials() {
+      document.getElementById("loginEmail").value = "student@quickbuy.demo";
+      document.getElementById("loginPassword").value = "demo123";
+      showToast("Demo credentials filled!", "info");
+    }
+
+    // Handle Login Form Submit
+    const loginForm = document.getElementById("loginForm");
+    const alertBox = document.getElementById("loginAlertBox");
+
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      alertBox.classList.add("d-none");
+
+      const email = document.getElementById("loginEmail").value.trim().toLowerCase();
+      const password = document.getElementById("loginPassword").value.trim();
+
+      if (!email || !password) {
+        alertBox.textContent = "Please enter both email address and password.";
+        alertBox.classList.remove("d-none");
+        return;
+      }
+
+      // Check registered users in localStorage
+      const users = JSON.parse(localStorage.getItem("quickbuy_users")) || [];
+      
+      // Default demo user
+      const isDemoUser = (email === "student@quickbuy.demo" && password === "demo123");
+      const matchedUser = isDemoUser 
+        ? { name: "Alex Student", email: "student@quickbuy.demo" }
+        : users.find(u => u.email.toLowerCase() === email && u.password === password);
+
+      if (matchedUser) {
+        // Save current user session
+        localStorage.setItem("quickbuy_current_user", JSON.stringify({
+          name: matchedUser.name,
+          email: matchedUser.email,
+          loggedInAt: new Date().toISOString()
+        }));
+
+        showToast(`Welcome back, ${matchedUser.name}! Redirecting to store...`, "success");
+        
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 1200);
+      } else {
+        alertBox.textContent = "Invalid email or password. Use demo credentials or create an account.";
+        alertBox.classList.remove("d-none");
+        showToast("Invalid credentials.", "danger");
+      }
+    });
+
+    // Forgot Password Form Submit
+    const forgotForm = document.getElementById("forgotPasswordForm");
+    if (forgotForm) {
+      forgotForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = document.getElementById("resetEmail").value.trim();
+        const modalEl = document.getElementById("forgotPasswordModal");
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        if (modal) modal.hide();
+        showToast(`Password reset link simulated for ${email}. Check your email!`, "success");
+        forgotForm.reset();
+      });
+    }
+
+    // Auto-fill email if passed in URL query param (e.g. from register.html?email=...)
+    const urlParams = new URLSearchParams(window.location.search);
+    const emailParam = urlParams.get("email");
+    if (emailParam) {
+      document.getElementById("loginEmail").value = emailParam;
+      document.getElementById("loginPassword").focus();
+    }
+  </script>
+</body>
+</html>

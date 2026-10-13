@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuickBuy — Smart Shopping Website | Shop Smart. Buy Better.</title>
+  <meta name="description" content="QuickBuy is a modern smart shopping e-commerce website with instant filters, rule-based personalized Smart Picks recommendations, and persistent cart & wishlist.">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Bootstrap Icons 1.11.3 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       1. NAVIGATION BAR (Sticky Glassmorphism Header)
+       ======================================================================== -->
+  <nav class="navbar navbar-expand-lg navbar-custom sticky-top" id="mainNavbar">
+    <div class="container">
+      <!-- Brand Logo -->
+      <a class="navbar-brand navbar-brand-logo" href="#home">
+        <span class="brand-icon-box">
+          <i class="bi bi-bag-check-fill"></i>
+        </span>
+        <span>Quick<span class="text-purple">Buy</span></span>
+      </a>
+
+      <!-- Mobile Right Controls (User, Theme, Wishlist, Cart, Toggler) -->
+      <div class="d-flex align-items-center gap-2 order-lg-3">
+        <!-- User Account / Login Button Container -->
+        <div id="userNavContainer" class="d-inline-flex align-items-center">
+          <a href="login.html" class="nav-icon-btn" id="userLoginBtn" title="Sign In / Register" aria-label="Sign In">
+            <i class="bi bi-person"></i>
+          </a>
+        </div>
+
+        <!-- Theme Toggle Button -->
+        <button class="nav-icon-btn" id="themeToggleBtn" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+          <i class="bi bi-moon-stars-fill text-purple" id="themeToggleIcon"></i>
+        </button>
+
+        <!-- Wishlist Button with Badge -->
+        <button class="nav-icon-btn" data-bs-toggle="offcanvas" data-bs-target="#wishlistOffcanvas" aria-controls="wishlistOffcanvas" title="Wishlist" aria-label="View Wishlist">
+          <i class="bi bi-heart"></i>
+          <span class="nav-badge wishlist-count-badge" style="display: none;">0</span>
+        </button>
+
+        <!-- Cart Button with Badge -->
+        <button class="nav-icon-btn" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" aria-controls="cartOffcanvas" title="Shopping Cart" aria-label="View Cart">
+          <i class="bi bi-cart3"></i>
+          <span class="nav-badge cart-count-badge" style="display: none;">0</span>
+        </button>
+
+        <!-- Mobile Navbar Toggler -->
+        <button class="navbar-toggler border-0 p-1 ms-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+
+      <!-- Collapsible Nav Items and Search Bar -->
+      <div class="collapse navbar-collapse order-lg-2" id="navbarContent">
+        <!-- Navigation Links -->
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-1">
+          <li class="nav-item">
+            <a class="nav-link active" href="#home"><i class="bi bi-house-door me-1"></i> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#shop"><i class="bi bi-grid me-1"></i> Shop</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#smart-picks"><i class="bi bi-stars text-purple me-1"></i> Smart Picks</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#categories"><i class="bi bi-tags me-1"></i> Categories</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#special-offers"><i class="bi bi-percent me-1"></i> Offers</a>
+          </li>
+        </ul>
+
+        <!-- Live Search Input in Navbar -->
+        <div class="nav-search-box me-lg-3">
+          <i class="bi bi-search nav-search-icon"></i>
+          <input type="text" id="navSearchInput" class="form-control nav-search-input" placeholder="Search products..." aria-label="Search products">
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========================================================================
+       2. HERO SECTION
+       ======================================================================== -->
+  <section class="hero-section" id="home">
+    <div class="hero-glow-1"></div>
+    <div class="hero-glow-2"></div>
+    <div class="container position-relative z-1">
+      <div class="row align-items-center g-5">
+        <!-- Hero Text & CTA -->
+        <div class="col-lg-6 text-center text-lg-start">
+          <div class="hero-pill">
+            <i class="bi bi-sparkles"></i> College Mini-Project • Smart Shopping
+          </div>
+          <h1 class="hero-title">
+            Everything You Love, <br>
+            <span class="gradient-text">Just a Click Away.</span>
+          </h1>
+          <p class="hero-subtitle">
+            Discover amazing products, compare prices, and shop smarter with QuickBuy. Enjoy instant smart recommendations tailored to your style and budget.
+          </p>
+          <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start mb-4">
+            <a href="#shop" class="btn btn-purple btn-lg px-4">
+              <i class="bi bi-bag-fill me-2"></i> Shop Now
+            </a>
+            <a href="#smart-picks" class="btn btn-outline-purple btn-lg px-4">
+              <i class="bi bi-stars me-2"></i> Find My Perfect Pick
+            </a>
+          </div>
+
+          <!-- Quick Stats / Highlights -->
+          <div class="d-flex gap-4 justify-content-center justify-content-lg-start text-muted small pt-2">
+            <div><i class="bi bi-check2-circle text-purple me-1"></i> 48+ Premium Items</div>
+            <div><i class="bi bi-check2-circle text-purple me-1"></i> Instant Filters</div>
+            <div><i class="bi bi-check2-circle text-purple me-1"></i> LocalStorage Saved</div>
+          </div>
+        </div>
+
+        <!-- Hero Showcase Card with Floating Badges -->
+        <div class="col-lg-6">
+          <div class="hero-card-stack">
+            <!-- Floating Badge 1: Smart Match -->
+            <div class="floating-badge floating-badge-1">
+              <div class="brand-icon-box" style="width: 32px; height: 32px; font-size: 1rem;">
+                <i class="bi bi-stars"></i>
+              </div>
+              <div>
+                <div class="fw-bold small">Smart Picks Engine</div>
+                <div class="text-muted" style="font-size: 0.75rem;">Budget & Style Matched</div>
+              </div>
+            </div>
+
+            <!-- Floating Badge 2: Coupon Discount -->
+            <div class="floating-badge floating-badge-2">
+              <div class="badge bg-purple p-2 rounded-circle">
+                <i class="bi bi-gift-fill"></i>
+              </div>
+              <div>
+                <div class="fw-bold small">10% OFF with code</div>
+                <div class="text-purple fw-bold font-monospace" style="font-size: 0.8rem;">QUICK10</div>
+              </div>
+            </div>
+
+            <!-- Bootstrap 5 Carousel Showcase Card -->
+            <div id="heroCarousel" class="carousel slide carousel-fade hero-main-card shadow-lg" data-bs-ride="carousel" data-bs-interval="4500">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              </div>
+
+              <div class="carousel-inner">
+                <!-- Slide 1: Watches & Style -->
+                <div class="carousel-item active">
+                  <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80" 
+                       alt="Minimalist Chronograph Watch" 
+                       class="hero-card-img" 
+                       onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80'">
+                  <div class="p-4 bg-surface">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                      <span class="badge bg-purple-subtle text-purple">Top Rated Watch</span>
+                      <span class="text-warning small fw-bold">★ 4.9 (178 reviews)</span>
+                    </div>
+                    <h5 class="fw-bold mb-1">Matte Black Chronograph Timepiece</h5>
+                    <p class="text-muted small mb-0">Precision Japanese movement encased in scratch-resistant sapphire coated crystal.</p>
+                  </div>
+                </div>
+
+                <!-- Slide 2: Footwear Performance -->
+                <div class="carousel-item">
+                  <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80" 
+                       alt="Pro-Runner Cushion Sneakers" 
+                       class="hero-card-img" 
+                       onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=800&q=80'">
+                  <div class="p-4 bg-surface">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                      <span class="badge bg-danger-subtle text-danger">Best Seller Footwear</span>
+                      <span class="text-warning small fw-bold">★ 4.9 (215 reviews)</span>
+                    </div>
+                    <h5 class="fw-bold mb-1">Pro-Runner Cushion Athletic Sneakers</h5>
+                    <p class="text-muted small mb-0">Engineered mesh ventilation with responsive energy-return cushioning.</p>
+                  </div>
+                </div>
+
+                <!-- Slide 3: Audio Electronics -->
+                <div class="carousel-item">
+                  <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80" 
+                       alt="Wireless ANC Headphones" 
+                       class="hero-card-img" 
+                       onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80'">
+                  <div class="p-4 bg-surface">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                      <span class="badge bg-success-subtle text-success">Student Favorite</span>
+                      <span class="text-warning small fw-bold">★ 4.9 (310 reviews)</span>
+                    </div>
+                    <h5 class="fw-bold mb-1">Wireless Active Noise Cancelling Headphones</h5>
+                    <p class="text-muted small mb-0">Blocks 95% ambient noise with 40-hour ultra-long battery life for study and travel.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Carousel Controls -->
+              <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev" aria-label="Previous">
+                <span class="carousel-control-prev-icon p-2 rounded-circle bg-dark bg-opacity-50" aria-hidden="true"></span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next" aria-label="Next">
+                <span class="carousel-control-next-icon p-2 rounded-circle bg-dark bg-opacity-50" aria-hidden="true"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       3. TRUST FEATURES STRIP
+       ======================================================================== -->
+  <section class="py-4 border-bottom bg-surface">
+    <div class="container">
+      <div class="row g-3">
+        <div class="col-6 col-md-3">
+          <div class="feature-badge-box">
+            <div class="feature-badge-icon">
+              <i class="bi bi-truck"></i>
+            </div>
+            <h6 class="fw-bold mb-1">Free Delivery</h6>
+            <p class="text-muted small mb-0">On all orders over $50</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="feature-badge-box">
+            <div class="feature-badge-icon">
+              <i class="bi bi-shield-check"></i>
+            </div>
+            <h6 class="fw-bold mb-1">100% Secure Checkout</h6>
+            <p class="text-muted small mb-0">Safe demo validation</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="feature-badge-box">
+            <div class="feature-badge-icon">
+              <i class="bi bi-arrow-repeat"></i>
+            </div>
+            <h6 class="fw-bold mb-1">30 Days Returns</h6>
+            <p class="text-muted small mb-0">Hassle-free guarantee</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="feature-badge-box">
+            <div class="feature-badge-icon">
+              <i class="bi bi-stars"></i>
+            </div>
+            <h6 class="fw-bold mb-1">Smart Recommendations</h6>
+            <p class="text-muted small mb-0">Personalized picking engine</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       4. POPULAR PRODUCT CATEGORIES
+       ======================================================================== -->
+  <section class="py-5" id="categories">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="badge bg-purple-subtle text-purple px-3 py-2 rounded-pill fw-semibold mb-2">Explore Catalog</span>
+        <h2 class="fw-bold">Popular Categories</h2>
+        <p class="text-muted">Click any category to instantly filter available products in the shop</p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Clothing -->
+        <div class="col-6 col-md-4 col-lg-2">
+          <div class="category-card" onclick="selectCategoryFromCard('Clothing')">
+            <div class="category-icon-wrapper">
+              <i class="bi bi-person-standing"></i>
+            </div>
+            <h6 class="fw-bold mb-1">Clothing</h6>
+            <span class="text-muted small">8 Products</span>
+          </div>
+        </div>
+
+        <!-- Footwear -->
+        <div class="col-6 col-md-4 col-lg-2">
+          <div class="category-card" onclick="selectCategoryFromCard('Footwear')">
+            <div class="category-icon-wrapper">
+              <i class="bi bi-bootstrap-reboot"></i>
+            </div>
+            <h6 class="fw-bold mb-1">Footwear</h6>
+            <span class="text-muted small">8 Products</span>
+          </div>
+        </div>
+
+        <!-- Electronics -->
+        <div class="col-6 col-md-4 col-lg-2">
+          <div class="category-card" onclick="selectCategoryFromCard('Electronics')">
+            <div class="category-icon-wrapper">
+              <i class="bi bi-headphones"></i>
+            </div>
+            <h6 class="fw-bold mb-1">Electronics</h6>
+            <span class="text-muted small">8 Products</span>
+          </div>
+        </div>
+
+        <!-- Accessories -->
+        <div class="col-6 col-md-4 col-lg-2">
+          <div class="category-card" onclick="selectCategoryFromCard('Accessories')">
+            <div class="category-icon-wrapper">
+              <i class="bi bi-eyeglasses"></i>
+            </div>
+            <h6 class="fw-bold mb-1">Accessories</h6>
+            <span class="text-muted small">8 Products</span>
+          </div>
+        </div>
+
+        <!-- Bags -->
+        <div class="col-6 col-md-4 col-lg-2">
+          <div class="category-card" onclick="selectCategoryFromCard('Bags')">
+            <div class="category-icon-wrapper">
+              <i class="bi bi-backpack4"></i>
+            </div>
+            <h6 class="fw-bold mb-1">Bags</h6>
+            <span class="text-muted small">8 Products</span>
+          </div>
+        </div>
+
+        <!-- Watches -->
+        <div class="col-6 col-md-4 col-lg-2">
+          <div class="category-card" onclick="selectCategoryFromCard('Watches')">
+            <div class="category-icon-wrapper">
+              <i class="bi bi-watch"></i>
+            </div>
+            <h6 class="fw-bold mb-1">Watches</h6>
+            <span class="text-muted small">8 Products</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       5. SMART PICKS — PERSONALIZED SHOPPING RECOMMENDATIONS
+       ======================================================================== -->
+  <section class="py-5 bg-surface border-top border-bottom" id="smart-picks">
+    <div class="container">
+      <div class="text-center mb-4">
+        <div class="smart-picks-header-badge mb-2">
+          <i class="bi bi-magic"></i> Personalized Recommendation Engine
+        </div>
+        <h2 class="fw-bold">Smart Picks — Your Personalized Shopper</h2>
+        <p class="text-muted mx-auto" style="max-width: 650px;">
+          Tell us your occasion, style preference, and budget. Our rule-based smart algorithm curates the best-fitting products within your spending limit!
+        </p>
+      </div>
+
+      <div class="smart-picks-container p-4 p-lg-5">
+        <div class="row g-4">
+          <!-- Left: User Preference Wizard Form -->
+          <div class="col-lg-5">
+            <div class="smart-picker-card h-100">
+              <h5 class="fw-bold mb-3 d-flex align-items-center gap-2">
+                <i class="bi bi-sliders text-purple"></i> Set Your Preferences
+              </h5>
+
+              <!-- Shopping Purpose -->
+              <div class="mb-3">
+                <label for="smartPurposeSelect" class="form-label">
+                  <i class="bi bi-calendar2-event me-1"></i> Shopping Purpose
+                </label>
+                <select id="smartPurposeSelect" class="form-select">
+                  <option value="College" selected>College / University</option>
+                  <option value="Office">Office / Work</option>
+                  <option value="Party">Party / Evening Out</option>
+                  <option value="Casual">Casual Hanging Out</option>
+                  <option value="Daily Use">Daily Everyday Use</option>
+                </select>
+              </div>
+
+              <!-- Preferred Style -->
+              <div class="mb-3">
+                <label for="smartStyleSelect" class="form-label">
+                  <i class="bi bi-palette me-1"></i> Preferred Style
+                </label>
+                <select id="smartStyleSelect" class="form-select">
+                  <option value="Casual" selected>Casual</option>
+                  <option value="Formal">Formal & Elegant</option>
+                  <option value="Sporty">Sporty & Active</option>
+                  <option value="Streetwear">Streetwear & Trendy</option>
+                  <option value="Minimal">Clean Minimalist</option>
+                </select>
+              </div>
+
+              <!-- Product Category -->
+              <div class="mb-3">
+                <label for="smartCategorySelect" class="form-label">
+                  <i class="bi bi-collection me-1"></i> Product Category
+                </label>
+                <select id="smartCategorySelect" class="form-select">
+                  <option value="Any" selected>Any (Mix & Match)</option>
+                  <option value="Clothing">Clothing</option>
+                  <option value="Footwear">Footwear</option>
+                  <option value="Electronics">Electronics</option>
+                  <option value="Accessories">Accessories</option>
+                  <option value="Bags">Bags</option>
+                  <option value="Watches">Watches</option>
+                </select>
+              </div>
+
+              <!-- Budget Slider -->
+              <div class="mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <label for="smartBudgetSlider" class="form-label mb-0">
+                    <i class="bi bi-cash-stack me-1"></i> Maximum Budget
+                  </label>
+                  <span id="smartBudgetValue" class="budget-slider-display">$120</span>
+                </div>
+                <input type="range" class="form-range" id="smartBudgetSlider" min="30" max="250" step="10" value="120">
+                <div class="d-flex justify-content-between small text-muted">
+                  <span>$30</span>
+                  <span>$140</span>
+                  <span>$250</span>
+                </div>
+              </div>
+
+              <!-- Submit Recommendation -->
+              <button class="btn btn-purple w-100 py-2 fs-6 fw-bold shadow-sm" id="findSmartPicksBtn">
+                <i class="bi bi-stars me-2"></i> Find My Perfect Pick
+              </button>
+            </div>
+          </div>
+
+          <!-- Right: Recommendation Results Grid -->
+          <div class="col-lg-7">
+            <!-- Dynamic Feedback & Budget Utilization Summary -->
+            <div id="smartPicksFeedback"></div>
+
+            <!-- Matched Recommendations Grid -->
+            <div class="row g-3" id="smartPicksResults">
+              <!-- Initial Welcome Message Before First Generation -->
+              <div class="col-12 text-center py-5">
+                <div class="mb-3">
+                  <i class="bi bi-compass text-purple" style="font-size: 3rem;"></i>
+                </div>
+                <h5 class="fw-bold mb-2">Ready to Discover Your Best Matches?</h5>
+                <p class="text-muted small mx-auto" style="max-width: 380px;">
+                  Configure your purpose and budget on the left, then click <strong>"Find My Perfect Pick"</strong> to generate personalized suggestions!
+                </p>
+                <button class="btn btn-soft btn-sm px-3" onclick="generateSmartPicks()">
+                  <i class="bi bi-magic me-1"></i> Run Smart Match Now
+                </button>
+              </div>
+            </div>
+
+            <!-- Affordable Alternatives Grid -->
+            <div class="row g-2" id="smartPicksAlternatives"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       6. SHOP SECTION (GRID, SEARCH, FILTERS & SORTING)
+       ======================================================================== -->
+  <section class="py-5" id="shop">
+    <div class="container">
+      <!-- Section Header -->
+      <div class="d-flex flex-wrap justify-content-between align-items-end mb-4 gap-3">
+        <div>
+          <span class="badge bg-purple-subtle text-purple px-3 py-2 rounded-pill fw-semibold mb-2">Our Store</span>
+          <h2 class="fw-bold mb-1">Explore All Products</h2>
+          <p class="text-muted mb-0" id="productCountBadge">Loading products...</p>
+        </div>
+
+        <!-- Reset Filters Button -->
+        <button class="btn btn-outline-purple btn-sm" onclick="resetFilters()">
+          <i class="bi bi-arrow-counterclockwise me-1"></i> Reset All Filters
+        </button>
+      </div>
+
+      <!-- Bootstrap 5 Tag Filter Nav Pills -->
+      <ul class="nav nav-pills mb-3 gap-2" id="shopNavPills">
+        <li class="nav-item">
+          <button class="nav-link active px-3 py-1 small rounded-pill tag-filter-pill" data-tag="All">
+            <i class="bi bi-grid-fill me-1"></i> All Items
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link px-3 py-1 small rounded-pill tag-filter-pill" data-tag="Best Seller">
+            <i class="bi bi-fire text-danger me-1"></i> Best Sellers
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link px-3 py-1 small rounded-pill tag-filter-pill" data-tag="Trending">
+            <i class="bi bi-lightning-charge-fill text-warning me-1"></i> Trending
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link px-3 py-1 small rounded-pill tag-filter-pill" data-tag="Sale">
+            <i class="bi bi-tag-fill text-success me-1"></i> On Sale
+          </button>
+        </li>
+      </ul>
+
+      <!-- Filter & Search Toolbar Card -->
+      <div class="card border mb-4 bg-surface shadow-sm">
+        <div class="card-body p-3 p-lg-4">
+          <div class="row g-3 align-items-center">
+            <!-- Live Search Input -->
+            <div class="col-12 col-md-4">
+              <label class="form-label mb-1 small fw-bold">Live Search</label>
+              <div class="position-relative">
+                <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+                <input type="text" id="shopSearchInput" class="form-control ps-5" placeholder="Type product name, category...">
+              </div>
+            </div>
+
+            <!-- Price Range Filter Slider -->
+            <div class="col-12 col-sm-6 col-md-4">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <label for="priceRangeInput" class="form-label mb-0 small fw-bold">Max Price</label>
+                <span class="fw-bold text-purple" id="priceRangeValue">$150</span>
+              </div>
+              <input type="range" class="form-range" id="priceRangeInput" min="20" max="150" step="5" value="150">
+            </div>
+
+            <!-- Sorting Dropdown -->
+            <div class="col-12 col-sm-6 col-md-4">
+              <label for="sortSelect" class="form-label mb-1 small fw-bold">Sort By</label>
+              <select id="sortSelect" class="form-select">
+                <option value="featured" selected>Featured / Default</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="rating">Highest Customer Rating</option>
+                <option value="bestseller">Popularity / Best Sellers</option>
+              </select>
+            </div>
+
+            <!-- Category Filter Pills Strip -->
+            <div class="col-12 pt-2 border-top">
+              <div class="d-flex flex-wrap gap-2 align-items-center">
+                <span class="small fw-bold text-muted me-2"><i class="bi bi-funnel me-1"></i> Categories:</span>
+                <button class="filter-pill category-filter-btn active" data-category="All">All Categories</button>
+                <button class="filter-pill category-filter-btn" data-category="Clothing">Clothing</button>
+                <button class="filter-pill category-filter-btn" data-category="Footwear">Footwear</button>
+                <button class="filter-pill category-filter-btn" data-category="Electronics">Electronics</button>
+                <button class="filter-pill category-filter-btn" data-category="Accessories">Accessories</button>
+                <button class="filter-pill category-filter-btn" data-category="Bags">Bags</button>
+                <button class="filter-pill category-filter-btn" data-category="Watches">Watches</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Product Grid Container (Populated Dynamically by script.js) -->
+      <div class="row g-4" id="productsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       7. SPECIAL OFFERS & PROMOTIONAL COUPON BANNER
+       ======================================================================== -->
+  <section class="py-5" id="special-offers">
+    <div class="container">
+      <div class="promo-banner">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-8">
+            <span class="badge bg-light text-purple fw-bold px-3 py-1 mb-3">Limited Student & College Offer</span>
+            <h2 class="display-6 fw-bold mb-2">Get 10% Off Everything in Your Cart!</h2>
+            <p class="mb-4 text-white-50 fs-6">
+              Use our exclusive discount coupon at checkout. Valid on all products with free shipping on orders over $50!
+            </p>
+            <div class="d-inline-flex align-items-center gap-3 flex-wrap">
+              <div class="coupon-badge" onclick="copyCouponCode('QUICK10')" title="Click to copy code">
+                <span>QUICK10</span>
+                <i class="bi bi-clipboard"></i>
+              </div>
+              <span class="small text-white-50"><i class="bi bi-cursor-fill me-1"></i> Click code to copy instantly</span>
+            </div>
+          </div>
+          <div class="col-lg-4 text-center text-lg-end">
+            <a href="#shop" class="btn btn-light btn-lg px-4 text-purple fw-bold shadow">
+              <i class="bi bi-bag-check me-2"></i> Claim Your Deal
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       8. CUSTOMER TESTIMONIALS & REVIEWS
+       ======================================================================== -->
+  <section class="py-5 bg-surface border-top">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="badge bg-purple-subtle text-purple px-3 py-2 rounded-pill fw-semibold mb-2">Social Proof</span>
+        <h2 class="fw-bold">Loved by Smart Shoppers</h2>
+        <p class="text-muted">Real ratings and feedback from our early campus users</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card h-100 border p-4 bg-surface shadow-sm">
+            <div class="text-warning mb-2">★★★★★</div>
+            <p class="text-muted small mb-3">
+              "The Smart Picks feature recommended the anti-theft backpack and wireless headphones right within my $120 college budget. Super fast and accurate!"
+            </p>
+            <div class="d-flex align-items-center gap-3">
+              <div class="brand-icon-box" style="width: 36px; height: 36px; font-size: 0.9rem;">
+                <i class="bi bi-person"></i>
+              </div>
+              <div>
+                <h6 class="fw-bold mb-0">Rohan Sharma</h6>
+                <span class="text-muted small">Computer Science Student</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card h-100 border p-4 bg-surface shadow-sm">
+            <div class="text-warning mb-2">★★★★★</div>
+            <p class="text-muted small mb-3">
+              "Applied code QUICK10 and got an instant 10% discount on the Chelsea boots. Smooth checkout flow and modern dark mode!"
+            </p>
+            <div class="d-flex align-items-center gap-3">
+              <div class="brand-icon-box" style="width: 36px; height: 36px; font-size: 0.9rem;">
+                <i class="bi bi-person"></i>
+              </div>
+              <div>
+                <h6 class="fw-bold mb-0">Priya Patel</h6>
+                <span class="text-muted small">Design Student</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card h-100 border p-4 bg-surface shadow-sm">
+            <div class="text-warning mb-2">★★★★★</div>
+            <p class="text-muted small mb-3">
+              "The live search and category filter work seamlessly without reloading. Great responsive interface on mobile too."
+            </p>
+            <div class="d-flex align-items-center gap-3">
+              <div class="brand-icon-box" style="width: 36px; height: 36px; font-size: 0.9rem;">
+                <i class="bi bi-person"></i>
+              </div>
+              <div>
+                <h6 class="fw-bold mb-0">Arun Varma</h6>
+                <span class="text-muted small">Engineering Student</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       8B. FREQUENTLY ASKED QUESTIONS (BOOTSTRAP 5 ACCORDION COMPONENT)
+       ======================================================================== -->
+  <section class="py-5" id="faq">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="badge bg-purple-subtle text-purple px-3 py-2 rounded-pill fw-semibold mb-2">
+          <i class="bi bi-question-circle me-1"></i> Help & FAQs
+        </span>
+        <h2 class="fw-bold">Frequently Asked Questions</h2>
+        <p class="text-muted">Quick answers to common questions about QuickBuy and the project architecture</p>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="accordion shadow-sm" id="quickbuyFaqAccordion">
+            <!-- Item 1 -->
+            <div class="accordion-item border rounded-3 mb-3 overflow-hidden">
+              <h2 class="accordion-header" id="faqHeadingOne">
+                <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseOne" aria-expanded="true" aria-controls="faqCollapseOne">
+                  <i class="bi bi-magic text-purple me-2"></i> How does the Smart Picks recommendation engine work?
+                </button>
+              </h2>
+              <div id="faqCollapseOne" class="accordion-collapse collapse show" aria-labelledby="faqHeadingOne" data-bs-parent="#quickbuyFaqAccordion">
+                <div class="accordion-body small text-muted">
+                  QuickBuy uses an intelligent rule-based scoring algorithm implemented in vanilla JavaScript. It matches your chosen shopping purpose (+35 points), style (+30 points), and product category (+25 points), checks whether the item price comfortably fits within your selected budget (+20 points), and adds a customer rating multiplier. The highest-ranked items are presented along with dynamic explanation badges and budget utilization tracking.
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="accordion-item border rounded-3 mb-3 overflow-hidden">
+              <h2 class="accordion-header" id="faqHeadingTwo">
+                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseTwo" aria-expanded="false" aria-controls="faqCollapseTwo">
+                  <i class="bi bi-ticket-perforated text-purple me-2"></i> How do I apply the 10% discount coupon?
+                </button>
+              </h2>
+              <div id="faqCollapseTwo" class="accordion-collapse collapse" aria-labelledby="faqHeadingTwo" data-bs-parent="#quickbuyFaqAccordion">
+                <div class="accordion-body small text-muted">
+                  You can click the coupon badge <code>QUICK10</code> in the Special Offers section to copy it to your clipboard. Then open your cart drawer, paste it into the coupon input field, and click <strong>Apply</strong>. The cart will automatically deduct 10% from your order subtotal and show real-time feedback.
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="accordion-item border rounded-3 mb-3 overflow-hidden">
+              <h2 class="accordion-header" id="faqHeadingThree">
+                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseThree" aria-expanded="false" aria-controls="faqCollapseThree">
+                  <i class="bi bi-database text-purple me-2"></i> Is my cart and wishlist saved when I refresh the page?
+                </button>
+              </h2>
+              <div id="faqCollapseThree" class="accordion-collapse collapse" aria-labelledby="faqHeadingThree" data-bs-parent="#quickbuyFaqAccordion">
+                <div class="accordion-body small text-muted">
+                  Yes! All cart items, quantities, wishlist items, coupon status, and dark/light mode preference are automatically serialized and saved to your browser's <code>localStorage</code>. When you refresh or reopen the tab, your items and preferences are instantly restored.
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="accordion-item border rounded-3 mb-3 overflow-hidden">
+              <h2 class="accordion-header" id="faqHeadingFour">
+                <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseFour" aria-expanded="false" aria-controls="faqCollapseFour">
+                  <i class="bi bi-truck text-purple me-2"></i> How do delivery charges work?
+                </button>
+              </h2>
+              <div id="faqCollapseFour" class="accordion-collapse collapse" aria-labelledby="faqHeadingFour" data-bs-parent="#quickbuyFaqAccordion">
+                <div class="accordion-body small text-muted">
+                  Delivery is completely <strong>FREE</strong> for all orders with a subtotal of $50.00 or more. For orders below $50.00, a standard shipping fee of $5.00 is applied. The cart drawer features a live Bootstrap progress bar that shows how much more you need to add to unlock free shipping.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       9. FOOTER
+       ======================================================================== -->
+  <footer class="footer-custom">
+    <div class="container">
+      <div class="row g-4 mb-5">
+        <!-- Brand & Description -->
+        <div class="col-lg-4 col-md-6">
+          <a class="navbar-brand navbar-brand-logo mb-3 d-inline-flex" href="#home">
+            <span class="brand-icon-box">
+              <i class="bi bi-bag-check-fill"></i>
+            </span>
+            <span>Quick<span class="text-purple">Buy</span></span>
+          </a>
+          <p class="text-muted small pe-lg-4">
+            QuickBuy is a premier smart shopping platform built with HTML5, CSS3, JavaScript, and Bootstrap 5. Designed for smart shoppers with rule-based recommendations and local storage persistence.
+          </p>
+          <div class="d-flex gap-2">
+            <a href="javascript:void(0)" class="social-btn" title="Twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="javascript:void(0)" class="social-btn" title="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="javascript:void(0)" class="social-btn" title="GitHub"><i class="bi bi-github"></i></a>
+            <a href="javascript:void(0)" class="social-btn" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="col-lg-2 col-md-6 col-6">
+          <h6 class="fw-bold mb-3">Quick Links</h6>
+          <a href="#home" class="footer-link">Home</a>
+          <a href="#shop" class="footer-link">All Products</a>
+          <a href="#smart-picks" class="footer-link">Smart Picks</a>
+          <a href="#categories" class="footer-link">Categories</a>
+          <a href="#special-offers" class="footer-link">Special Offers</a>
+        </div>
+
+        <!-- Customer Care -->
+        <div class="col-lg-3 col-md-6 col-6">
+          <h6 class="fw-bold mb-3">Customer Care</h6>
+          <a href="javascript:void(0)" class="footer-link">Order Tracking</a>
+          <a href="javascript:void(0)" class="footer-link">Returns & Refunds</a>
+          <a href="javascript:void(0)" class="footer-link">Shipping Rates</a>
+          <a href="javascript:void(0)" class="footer-link">Help Center & FAQ</a>
+          <a href="javascript:void(0)" class="footer-link">Privacy Policy</a>
+        </div>
+
+        <!-- Contact & Newsletter -->
+        <div class="col-lg-3 col-md-6">
+          <h6 class="fw-bold mb-3">Contact & Support</h6>
+          <p class="text-muted small mb-2"><i class="bi bi-geo-alt text-purple me-2"></i> QuickBuy Campus Hub, Mini-Project Lab</p>
+          <p class="text-muted small mb-2"><i class="bi bi-envelope text-purple me-2"></i> support@quickbuy.demo</p>
+          <p class="text-muted small mb-3"><i class="bi bi-telephone text-purple me-2"></i> +1 (800) 555-QBUY</p>
+
+          <div class="input-group">
+            <input type="email" class="form-control form-control-sm" placeholder="Your email..." id="newsletterInput">
+            <button class="btn btn-purple btn-sm" onclick="showToast('Thank you for subscribing to QuickBuy updates!', 'success')">Join</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyright Row -->
+      <div class="border-top pt-4 text-center small text-muted d-flex flex-wrap justify-content-between align-items-center">
+        <span>© 2026 <strong>QuickBuy</strong>. All rights reserved. Built for College Mini-Project Demonstration.</span>
+        <span>Made with <i class="bi bi-heart-fill text-danger"></i> using HTML5, CSS3, JS & Bootstrap 5</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       10. OFFCANVAS SHOPPING CART DRAWER
+       ======================================================================== -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel" style="width: 420px; max-width: 100vw;">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title fw-bold d-flex align-items-center gap-2" id="cartOffcanvasLabel">
+        <i class="bi bi-cart3 text-purple"></i> Your Shopping Cart
+        <span class="badge bg-purple-subtle text-purple cart-count-badge small">0</span>
+      </h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+
+    <div class="offcanvas-body d-flex flex-column p-3">
+      <!-- Bootstrap 5 Free Delivery Progress Bar -->
+      <div class="p-2 mb-2 rounded border bg-secondary" id="shippingProgressBox">
+        <div class="d-flex justify-content-between align-items-center small mb-1">
+          <span id="shippingProgressText" class="fw-semibold">Add $50.00 more for FREE Delivery</span>
+          <span id="shippingProgressBadge" class="badge bg-purple-subtle text-purple">0%</span>
+        </div>
+        <div class="progress" style="height: 6px;">
+          <div id="shippingProgressBar" class="progress-bar bg-purple" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      </div>
+
+      <!-- Items List -->
+      <div class="flex-grow-1 overflow-y-auto" id="cartItemsList"></div>
+
+      <!-- Empty Cart Message -->
+      <div id="cartEmptyState" class="text-center my-auto py-5 d-none">
+        <i class="bi bi-cart-x text-muted" style="font-size: 3.5rem;"></i>
+        <h5 class="fw-bold mt-3 mb-1">Your cart is empty</h5>
+        <p class="text-muted small mb-4">Discover our top products and add your favorites.</p>
+        <button class="btn btn-purple" data-bs-dismiss="offcanvas" onclick="document.getElementById('shop').scrollIntoView({behavior: 'smooth'})">
+          <i class="bi bi-arrow-right me-1"></i> Start Shopping
+        </button>
+      </div>
+
+      <!-- Cart Footer / Financial Summary -->
+      <div id="cartFooter" class="border-top pt-3 mt-auto">
+        <!-- Coupon Code Box -->
+        <div class="mb-3">
+          <div class="input-group">
+            <input type="text" class="form-control" id="couponCodeInput" placeholder="Coupon code (QUICK10)" style="text-transform: uppercase;">
+            <button class="btn btn-outline-purple" type="button" id="applyCouponBtn">Apply</button>
+          </div>
+          <div id="couponFeedback"></div>
+        </div>
+
+        <!-- Summary Details -->
+        <div class="cart-summary-card mb-3">
+          <div class="cart-summary-line">
+            <span class="text-muted">Subtotal</span>
+            <span class="fw-bold" id="cartSubtotalAmount">$0.00</span>
+          </div>
+          <div class="cart-summary-line d-none" id="cartDiscountRow">
+            <span class="text-success"><i class="bi bi-tag-fill me-1"></i> Discount (10%)</span>
+            <span class="text-success fw-bold" id="cartDiscountAmount">-$0.00</span>
+          </div>
+          <div class="cart-summary-line">
+            <span class="text-muted">Delivery Charges</span>
+            <span class="fw-bold" id="cartDeliveryAmount">$0.00</span>
+          </div>
+          <div class="border-top my-2"></div>
+          <div class="d-flex justify-content-between fs-5 fw-bold">
+            <span>Total</span>
+            <span class="text-purple" id="cartTotalAmount">$0.00</span>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="d-grid gap-2">
+          <button class="btn btn-purple py-2 fw-bold" onclick="openCheckoutModal()">
+            <i class="bi bi-credit-card me-1"></i> Proceed to Checkout
+          </button>
+          <button class="btn btn-sm btn-outline-secondary" onclick="clearCart()">
+            <i class="bi bi-trash3 me-1"></i> Clear Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       11. OFFCANVAS WISHLIST DRAWER
+       ======================================================================== -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="wishlistOffcanvas" aria-labelledby="wishlistOffcanvasLabel" style="width: 400px; max-width: 100vw;">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title fw-bold d-flex align-items-center gap-2" id="wishlistOffcanvasLabel">
+        <i class="bi bi-heart-fill text-danger"></i> Saved in Wishlist
+        <span class="badge bg-purple-subtle text-purple wishlist-count-badge small">0</span>
+      </h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+
+    <div class="offcanvas-body d-flex flex-column p-3">
+      <!-- Items List -->
+      <div class="flex-grow-1 overflow-y-auto" id="wishlistItemsList"></div>
+
+      <!-- Empty Wishlist Message -->
+      <div id="wishlistEmptyState" class="text-center my-auto py-5 d-none">
+        <i class="bi bi-heart text-muted" style="font-size: 3.5rem;"></i>
+        <h5 class="fw-bold mt-3 mb-1">Your wishlist is empty</h5>
+        <p class="text-muted small mb-4">Click the heart icon on any product to save it here for later.</p>
+        <button class="btn btn-purple" data-bs-dismiss="offcanvas" onclick="document.getElementById('shop').scrollIntoView({behavior: 'smooth'})">
+          Explore Products
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       12. PRODUCT DETAILS MODAL (QUICK VIEW)
+       ======================================================================== -->
+  <div class="modal fade" id="productDetailsModal" tabindex="-1" aria-labelledby="productDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="badge bg-purple-subtle text-purple fw-semibold me-2" id="modalProductCategory">Category</span>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <div class="row g-4 align-items-center">
+            <!-- Modal Large Image -->
+            <div class="col-md-6 text-center">
+              <div class="rounded-3 overflow-hidden border bg-secondary" style="height: 320px;">
+                <img id="modalProductImage" src="" alt="Product" class="w-100 h-100 object-fit-cover" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=700&q=80'">
+              </div>
+            </div>
+
+            <!-- Modal Product Info -->
+            <div class="col-md-6">
+              <h4 class="fw-bold mb-2" id="modalProductTitle">Product Title</h4>
+              <div class="text-warning small mb-3" id="modalProductRating">★ 4.8</div>
+
+              <!-- Price Row -->
+              <div class="d-flex align-items-baseline gap-2 mb-3">
+                <span class="fs-3 fw-bold text-purple" id="modalProductPrice">$0.00</span>
+                <span class="text-muted text-decoration-line-through" id="modalProductOriginalPrice">$0.00</span>
+                <span class="badge bg-success-subtle text-success fw-bold" id="modalProductDiscount">10% OFF</span>
+              </div>
+
+              <!-- Description -->
+              <p class="text-muted small mb-3" id="modalProductDescription">Detailed description goes here...</p>
+
+              <!-- Features Bullet List -->
+              <div class="mb-3">
+                <div class="fw-bold small mb-1">Key Highlights:</div>
+                <ul class="list-unstyled small text-muted mb-0" id="modalProductFeatures"></ul>
+              </div>
+
+              <!-- Tags -->
+              <div class="mb-4" id="modalProductTags"></div>
+
+              <!-- Quantity & Actions -->
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <div class="d-flex align-items-center gap-2">
+                  <label for="modalProductQuantity" class="small fw-bold">Qty:</label>
+                  <input type="number" id="modalProductQuantity" class="form-control form-control-sm text-center" value="1" min="1" max="10" style="width: 60px;">
+                </div>
+                <button class="btn btn-purple flex-grow-1" id="modalAddToCartBtn">
+                  <i class="bi bi-cart-plus me-1"></i> Add to Cart
+                </button>
+              </div>
+
+              <button class="btn btn-outline-secondary btn-sm w-100" id="modalWishlistBtn">
+                <i class="bi bi-heart me-1"></i> Add to Wishlist
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       13. CHECKOUT MODAL
+       ======================================================================== -->
+  <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold" id="checkoutModalLabel">
+            <i class="bi bi-shield-lock-fill text-purple me-1"></i> QuickBuy Express Checkout
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <form id="checkoutForm">
+          <div class="modal-body p-4">
+            <div class="row g-4">
+              <!-- Shipping Form Fields -->
+              <div class="col-md-7 border-end-md">
+                <h6 class="fw-bold mb-3"><i class="bi bi-truck me-1"></i> Delivery Information</h6>
+
+                <div class="mb-3">
+                  <label for="checkoutFullName" class="form-label">Full Name *</label>
+                  <input type="text" class="form-control" id="checkoutFullName" placeholder="e.g. Varshith Kumar" required>
+                </div>
+
+                <div class="row g-2 mb-3">
+                  <div class="col-sm-6">
+                    <label for="checkoutEmail" class="form-label">Email Address *</label>
+                    <input type="email" class="form-control" id="checkoutEmail" placeholder="name@example.com" required>
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="checkoutPhone" class="form-label">Phone Number *</label>
+                    <input type="tel" class="form-control" id="checkoutPhone" placeholder="+1 (555) 019-2834" required>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="checkoutAddress" class="form-label">Street Address *</label>
+                  <input type="text" class="form-control" id="checkoutAddress" placeholder="123 University Campus Road, Apt 4B" required>
+                </div>
+
+                <div class="row g-2 mb-3">
+                  <div class="col-sm-6">
+                    <label for="checkoutCity" class="form-label">City *</label>
+                    <input type="text" class="form-control" id="checkoutCity" placeholder="City" required>
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="checkoutPostal" class="form-label">Postal Code *</label>
+                    <input type="text" class="form-control" id="checkoutPostal" placeholder="500001" required>
+                  </div>
+                </div>
+
+                <!-- Simulated Payment Selection -->
+                <div class="mt-4">
+                  <h6 class="fw-bold mb-2"><i class="bi bi-credit-card me-1"></i> Payment Method (Demo)</h6>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="radio" name="paymentMethod" id="payCOD" checked>
+                    <label class="form-check-label small" for="payCOD">
+                      Cash on Delivery (Pay when order arrives)
+                    </label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="radio" name="paymentMethod" id="payUPI">
+                    <label class="form-check-label small" for="payUPI">
+                      UPI / QR Code Simulator
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="paymentMethod" id="payCard">
+                    <label class="form-check-label small" for="payCard">
+                      Credit / Debit Card (Simulated Sandbox)
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Order Summary Breakdown -->
+              <div class="col-md-5">
+                <h6 class="fw-bold mb-3"><i class="bi bi-receipt me-1"></i> Order Summary</h6>
+
+                <div class="border rounded p-3 bg-secondary mb-3" style="max-height: 200px; overflow-y: auto;" id="checkoutOrderSummaryItems">
+                  <!-- Injected items -->
+                </div>
+
+                <div class="card bg-surface border p-3">
+                  <div class="d-flex justify-content-between small text-muted mb-1">
+                    <span>Subtotal</span>
+                    <span id="checkoutSummarySubtotal">$0.00</span>
+                  </div>
+                  <div class="d-flex justify-content-between small text-success mb-1">
+                    <span>Coupon Discount</span>
+                    <span id="checkoutSummaryDiscount">$0.00</span>
+                  </div>
+                  <div class="d-flex justify-content-between small text-muted mb-2">
+                    <span>Delivery</span>
+                    <span id="checkoutSummaryDelivery">FREE</span>
+                  </div>
+                  <div class="border-top my-1"></div>
+                  <div class="d-flex justify-content-between fw-bold fs-6 pt-1">
+                    <span>Total Payable</span>
+                    <span class="text-purple" id="checkoutSummaryTotal">$0.00</span>
+                  </div>
+                </div>
+
+                <div class="alert alert-info py-2 px-3 mt-3 small mb-0">
+                  <i class="bi bi-info-circle me-1"></i> Demo environment: No real money is charged.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-purple px-4 fw-bold">
+              <i class="bi bi-check2-circle me-1"></i> Place Order Now
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       14. SIMULATED ORDER CONFIRMATION MODAL
+       ======================================================================== -->
+  <div class="modal fade" id="orderConfirmationModal" tabindex="-1" aria-labelledby="orderConfirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center p-4">
+        <div class="modal-body">
+          <div class="mb-3">
+            <div class="brand-icon-box mx-auto" style="width: 64px; height: 64px; font-size: 2rem;">
+              <i class="bi bi-check-lg"></i>
+            </div>
+          </div>
+
+          <h4 class="fw-bold mb-1">Order Confirmed!</h4>
+          <p class="text-muted small mb-4">
+            Thank you for shopping with QuickBuy. Your order has been placed successfully and is being prepared.
+          </p>
+
+          <div class="card bg-secondary border p-3 text-start small mb-4">
+            <div class="d-flex justify-content-between mb-2">
+              <span class="text-muted">Order Number:</span>
+              <strong class="font-monospace text-purple" id="confirmOrderNumber">QB-2026-12345</strong>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+              <span class="text-muted">Customer Name:</span>
+              <span class="fw-semibold" id="confirmCustomerName">Student Name</span>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+              <span class="text-muted">Shipping Address:</span>
+              <span class="fw-semibold text-truncate ms-2" style="max-width: 180px;" id="confirmCustomerAddress">Address</span>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+              <span class="text-muted">Estimated Delivery:</span>
+              <span class="fw-semibold text-success" id="confirmDeliveryDate">In 3 Business Days</span>
+            </div>
+            <div class="border-top my-2"></div>
+            <div class="d-flex justify-content-between fs-6 fw-bold">
+              <span>Amount Paid:</span>
+              <span class="text-purple" id="confirmOrderTotal">$0.00</span>
+            </div>
+          </div>
+
+          <button class="btn btn-purple w-100 py-2 fw-bold" data-bs-dismiss="modal">
+            <i class="bi bi-arrow-left me-1"></i> Continue Shopping
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       15. TOAST NOTIFICATIONS CONTAINER
+       ======================================================================== -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toastContainer"></div>
+
+  <!-- Bootstrap 5.3.3 Bundle with Popper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- QuickBuy Custom JavaScript Logic -->
+  <script src="script.js"></script>
+</body>
+</html>
