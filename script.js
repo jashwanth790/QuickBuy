@@ -910,12 +910,12 @@ function initUserAuthUI() {
       <div class="dropdown">
         <button class="btn btn-sm btn-soft d-inline-flex align-items-center gap-1 dropdown-toggle py-1 px-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="bi bi-person-circle text-purple fs-6"></i>
-          <span class="small fw-bold d-none d-sm-inline">₹{firstName}</span>
+          <span class="small fw-bold d-none d-sm-inline">${firstName}</span>
         </button>
         <ul class="dropdown-menu dropdown-menu-end shadow border">
           <li class="px-3 py-1 border-bottom small">
-            <div class="fw-bold text-main">₹{currentUser.name}</div>
-            <div class="text-muted" style="font-size: 0.75rem;">₹{currentUser.email}</div>
+            <div class="fw-bold text-main">${currentUser.name}</div>
+            <div class="text-muted" style="font-size: 0.75rem;">${currentUser.email}</div>
           </li>
           <li>
             <a class="dropdown-item small py-2 d-flex align-items-center gap-2" href="javascript:void(0)" onclick="showToast('Your account is active and verified!', 'info')">
@@ -967,7 +967,7 @@ function initTheme() {
       if (themeIcon) {
         themeIcon.className = STATE.theme === "dark" ? "bi bi-sun-fill text-warning" : "bi bi-moon-stars-fill text-purple";
       }
-      showToast(`Switched to ₹{STATE.theme === "dark" ? "Dark" : "Light"} Mode!`, "info");
+      showToast(`Switched to ${STATE.theme === "dark" ? "Dark" : "Light"} Mode!`, "info");
     });
   }
 }
@@ -988,7 +988,7 @@ function showToast(message, type = "info") {
                     type === "warning" ? "bi-exclamation-triangle-fill text-warning" : "bi-info-circle-fill text-purple";
 
   const toastEl = document.createElement("div");
-  toastEl.className = `toast align-items-center custom-toast ₹{bgClass} border-2 show mb-2`;
+  toastEl.className = `toast align-items-center custom-toast ${bgClass} border-2 show mb-2`;
   toastEl.setAttribute("role", "alert");
   toastEl.setAttribute("aria-live", "assertive");
   toastEl.setAttribute("aria-atomic", "true");
@@ -996,8 +996,8 @@ function showToast(message, type = "info") {
   toastEl.innerHTML = `
     <div class="d-flex">
       <div class="toast-body d-flex align-items-center gap-2 font-weight-500">
-        <i class="bi ₹{iconClass} fs-5"></i>
-        <span>₹{message}</span>
+        <i class="bi ${iconClass} fs-5"></i>
+        <span>${message}</span>
       </div>
       <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
@@ -1060,7 +1060,7 @@ function renderProducts() {
 
   // Update item count badge
   if (countBadge) {
-    countBadge.textContent = `₹{filtered.length} products found`;
+    countBadge.textContent = `${filtered.length} products found`;
   }
 
   // Handle empty state
@@ -1087,47 +1087,47 @@ function renderProducts() {
 
     return `
       <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
-        <div class="product-card" data-product-id="₹{prod.id}">
+        <div class="product-card" data-product-id="${prod.id}">
           <div class="product-img-wrapper">
-            <span class="badge ₹{prod.tag === 'Best Seller' ? 'bg-purple' : prod.tag === 'Sale' ? 'bg-danger' : 'bg-dark'} product-tag-badge">
-              ₹{prod.tag}
+            <span class="badge ${prod.tag === 'Best Seller' ? 'bg-purple' : prod.tag === 'Sale' ? 'bg-danger' : 'bg-dark'} product-tag-badge">
+              ${prod.tag}
             </span>
-            <button class="product-wishlist-btn ₹{isWishlisted ? 'active' : ''}" 
-                    title="₹{isWishlisted ? 'Remove from Wishlist' : 'Add to Wishlist'}"
-                    onclick="toggleWishlist(₹{prod.id}, event)">
-              <i class="bi ₹{isWishlisted ? 'bi-heart-fill' : 'bi-heart'}"></i>
+            <button class="product-wishlist-btn ${isWishlisted ? 'active' : ''}" 
+                    title="${isWishlisted ? 'Remove from Wishlist' : 'Add to Wishlist'}"
+                    onclick="toggleWishlist(${prod.id}, event)">
+              <i class="bi ${isWishlisted ? 'bi-heart-fill' : 'bi-heart'}"></i>
             </button>
-            <img src="₹{prod.image}" 
-                 alt="₹{prod.name}" 
+            <img src="${prod.image}" 
+                 alt="${prod.name}" 
                  class="product-card-img" 
                  loading="lazy"
-                 onerror="this.onerror=null; this.src='₹{FALLBACK_IMAGE}'">
+                 onerror="this.onerror=null; this.src='${FALLBACK_IMAGE}'">
           </div>
 
           <div class="product-card-body">
-            <div class="product-category-text">₹{prod.category}</div>
-            <h3 class="product-title" onclick="openProductModal(₹{prod.id})" title="₹{prod.name}">
-              ₹{prod.name}
+            <div class="product-category-text">${prod.category}</div>
+            <h3 class="product-title" onclick="openProductModal(${prod.id})" title="${prod.name}">
+              ${prod.name}
             </h3>
             
             <div class="product-rating">
-              <span>★ ₹{prod.rating}</span>
-              <span class="product-rating-count">(₹{prod.reviews})</span>
+              <span>★ ${prod.rating}</span>
+              <span class="product-rating-count">(${prod.reviews})</span>
             </div>
 
-            <p class="text-muted small text-truncate mb-2">₹{prod.shortDesc}</p>
+            <p class="text-muted small text-truncate mb-2">${prod.shortDesc}</p>
 
             <div class="product-price-row">
-              <span class="product-price">₹₹{prod.price.toFixed(2)}</span>
-              <span class="product-original-price">₹₹{prod.originalPrice.toFixed(2)}</span>
-              <span class="product-discount-pill">₹{discountPct}% OFF</span>
+              <span class="product-price">$${prod.price.toFixed(2)}</span>
+              <span class="product-original-price">$${prod.originalPrice.toFixed(2)}</span>
+              <span class="product-discount-pill">${discountPct}% OFF</span>
             </div>
 
             <div class="product-btn-group">
-              <button class="btn btn-purple w-100" onclick="addToCart(₹{prod.id}, 1, event)">
+              <button class="btn btn-purple w-100" onclick="addToCart(${prod.id}, 1, event)">
                 <i class="bi bi-cart-plus me-1"></i> Add to Cart
               </button>
-              <button class="btn btn-quick-view" title="Quick View" onclick="openProductModal(₹{prod.id})">
+              <button class="btn btn-quick-view" title="Quick View" onclick="openProductModal(${prod.id})">
                 <i class="bi bi-eye"></i>
               </button>
             </div>
@@ -1190,7 +1190,7 @@ function setupEventListeners() {
   if (priceRange && priceValueDisplay) {
     priceRange.addEventListener("input", (e) => {
       STATE.filters.maxPrice = parseFloat(e.target.value);
-      priceValueDisplay.textContent = `₹₹{STATE.filters.maxPrice}`;
+      priceValueDisplay.textContent = `$${STATE.filters.maxPrice}`;
       renderProducts();
     });
   }
@@ -1227,7 +1227,7 @@ function setupEventListeners() {
   const smartBudgetValue = document.getElementById("smartBudgetValue");
   if (smartBudgetSlider && smartBudgetValue) {
     smartBudgetSlider.addEventListener("input", (e) => {
-      smartBudgetValue.textContent = `₹₹{e.target.value}`;
+      smartBudgetValue.textContent = `$${e.target.value}`;
     });
   }
 }
@@ -1248,7 +1248,7 @@ function resetFilters() {
   const priceRange = document.getElementById("priceRangeInput");
   const priceValueDisplay = document.getElementById("priceRangeValue");
   if (priceRange) priceRange.value = 150;
-  if (priceValueDisplay) priceValueDisplay.textContent = "₹150";
+  if (priceValueDisplay) priceValueDisplay.textContent = "$150";
 
   const sortSelect = document.getElementById("sortSelect");
   if (sortSelect) sortSelect.value = "featured";
@@ -1321,7 +1321,7 @@ function addToCart(productId, quantity = 1, event = null) {
 
   saveCart();
   updateCartUI();
-  showToast(`Added "₹{product.name}" to cart!`, "success");
+  showToast(`Added "${product.name}" to cart!`, "success");
 }
 
 function updateCartQuantity(productId, delta) {
@@ -1344,7 +1344,7 @@ function removeFromCart(productId) {
   STATE.cart = STATE.cart.filter(item => item.id !== productId);
   saveCart();
   updateCartUI();
-  showToast(`Removed "₹{product ? product.name : 'Item'}" from cart.`, "info");
+  showToast(`Removed "${product ? product.name : 'Item'}" from cart.`, "info");
 }
 
 function clearCart() {
@@ -1378,7 +1378,7 @@ function calculateCartTotals() {
     discount = (subtotal * COUPONS[STATE.couponApplied].discountPct) / 100;
   }
 
-  // Delivery: Free if subtotal > ₹50, else ₹5.00 flat fee (or ₹0 if cart is empty)
+  // Delivery: Free if subtotal > $50, else $5.00 flat fee (or $0 if cart is empty)
   const delivery = subtotal === 0 ? 0 : (subtotal >= 50 ? 0 : 5.00);
   const total = Math.max(0, subtotal - discount + delivery);
 
@@ -1427,19 +1427,19 @@ function updateCartUI() {
 
     return `
       <div class="cart-item-row">
-        <img src="₹{prod.image}" alt="₹{prod.name}" class="cart-item-thumb" onerror="this.onerror=null; this.src='₹{FALLBACK_IMAGE}'">
+        <img src="${prod.image}" alt="${prod.name}" class="cart-item-thumb" onerror="this.onerror=null; this.src='${FALLBACK_IMAGE}'">
         <div class="flex-grow-1">
-          <h6 class="mb-1 text-truncate fw-bold" style="max-width: 170px;" title="₹{prod.name}">₹{prod.name}</h6>
-          <div class="text-purple fw-semibold small mb-2">₹₹{prod.price.toFixed(2)} each</div>
+          <h6 class="mb-1 text-truncate fw-bold" style="max-width: 170px;" title="${prod.name}">${prod.name}</h6>
+          <div class="text-purple fw-semibold small mb-2">$${prod.price.toFixed(2)} each</div>
           <div class="qty-control">
-            <button class="qty-btn" onclick="updateCartQuantity(₹{prod.id}, -1)">-</button>
-            <span class="qty-number">₹{item.quantity}</span>
-            <button class="qty-btn" onclick="updateCartQuantity(₹{prod.id}, 1)">+</button>
+            <button class="qty-btn" onclick="updateCartQuantity(${prod.id}, -1)">-</button>
+            <span class="qty-number">${item.quantity}</span>
+            <button class="qty-btn" onclick="updateCartQuantity(${prod.id}, 1)">+</button>
           </div>
         </div>
         <div class="text-end">
-          <div class="fw-bold fs-6 mb-2">₹₹{itemTotal}</div>
-          <button class="btn btn-sm text-danger p-0" title="Remove item" onclick="removeFromCart(₹{prod.id})">
+          <div class="fw-bold fs-6 mb-2">$${itemTotal}</div>
+          <button class="btn btn-sm text-danger p-0" title="Remove item" onclick="removeFromCart(${prod.id})">
             <i class="bi bi-trash3 fs-6"></i>
           </button>
         </div>
@@ -1448,12 +1448,12 @@ function updateCartUI() {
   }).join("");
 
   // Update Financials
-  if (subtotalEl) subtotalEl.textContent = `₹₹{subtotal.toFixed(2)}`;
+  if (subtotalEl) subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
   
   if (discountRow && discountEl) {
     if (discount > 0) {
       discountRow.classList.remove("d-none");
-      discountEl.textContent = `-₹₹{discount.toFixed(2)}`;
+      discountEl.textContent = `-$${discount.toFixed(2)}`;
     } else {
       discountRow.classList.add("d-none");
     }
@@ -1462,10 +1462,10 @@ function updateCartUI() {
   if (deliveryEl) {
     deliveryEl.innerHTML = delivery === 0 
       ? '<span class="text-success fw-bold">FREE</span>' 
-      : `₹₹{delivery.toFixed(2)}`;
+      : `$${delivery.toFixed(2)}`;
   }
 
-  if (totalEl) totalEl.textContent = `₹₹{total.toFixed(2)}`;
+  if (totalEl) totalEl.textContent = `$${total.toFixed(2)}`;
 
   // Bootstrap 5 Shipping Progress Bar Update
   const progressBar = document.getElementById("shippingProgressBar");
@@ -1482,11 +1482,11 @@ function updateCartUI() {
     } else {
       const pct = Math.min(100, Math.round((subtotal / 50) * 100));
       const needed = (50 - subtotal).toFixed(2);
-      progressBar.style.width = `₹{pct}%`;
+      progressBar.style.width = `${pct}%`;
       progressBar.className = "progress-bar bg-purple";
-      progressText.innerHTML = `Add <strong>₹₹{needed}</strong> more for FREE Delivery`;
+      progressText.innerHTML = `Add <strong>$${needed}</strong> more for FREE Delivery`;
       progressBadge.className = "badge bg-purple-subtle text-purple";
-      progressBadge.textContent = `₹{pct}%`;
+      progressBadge.textContent = `${pct}%`;
     }
   }
 
@@ -1495,7 +1495,7 @@ function updateCartUI() {
     if (STATE.couponApplied) {
       couponFeedback.innerHTML = `
         <div class="d-flex align-items-center justify-content-between text-success mt-2 small font-weight-500">
-          <span><i class="bi bi-check-circle-fill me-1"></i> Coupon <strong>₹{STATE.couponApplied}</strong> applied (10% OFF)!</span>
+          <span><i class="bi bi-check-circle-fill me-1"></i> Coupon <strong>${STATE.couponApplied}</strong> applied (10% OFF)!</span>
           <a href="javascript:void(0)" class="text-danger small" onclick="removeCoupon()">Remove</a>
         </div>
       `;
@@ -1524,7 +1524,7 @@ function applyCouponCode() {
     saveCart();
     updateCartUI();
     couponInput.value = "";
-    showToast(`Coupon "₹{code}" applied! You saved 10%.`, "success");
+    showToast(`Coupon "${code}" applied! You saved 10%.`, "success");
   } else {
     showToast("Invalid coupon code. Try QUICK10 for 10% discount!", "danger");
   }
@@ -1539,11 +1539,11 @@ function removeCoupon() {
 
 function copyCouponCode(code) {
   navigator.clipboard.writeText(code).then(() => {
-    showToast(`Code "₹{code}" copied to clipboard! Paste it in your cart.`, "success");
+    showToast(`Code "${code}" copied to clipboard! Paste it in your cart.`, "success");
     const cartCouponInput = document.getElementById("couponCodeInput");
     if (cartCouponInput) cartCouponInput.value = code;
   }).catch(() => {
-    showToast(`Code is: ₹{code}`, "info");
+    showToast(`Code is: ${code}`, "info");
   });
 }
 
@@ -1561,10 +1561,10 @@ function toggleWishlist(productId, event = null) {
   const index = STATE.wishlist.indexOf(productId);
   if (index > -1) {
     STATE.wishlist.splice(index, 1);
-    showToast(`Removed "₹{product.name}" from wishlist.`, "info");
+    showToast(`Removed "${product.name}" from wishlist.`, "info");
   } else {
     STATE.wishlist.push(productId);
-    showToast(`Saved "₹{product.name}" to your wishlist!`, "success");
+    showToast(`Saved "${product.name}" to your wishlist!`, "success");
   }
 
   saveWishlist();
@@ -1602,16 +1602,16 @@ function updateWishlistUI() {
 
     return `
       <div class="cart-item-row">
-        <img src="₹{prod.image}" alt="₹{prod.name}" class="cart-item-thumb" onerror="this.onerror=null; this.src='₹{FALLBACK_IMAGE}'">
+        <img src="${prod.image}" alt="${prod.name}" class="cart-item-thumb" onerror="this.onerror=null; this.src='${FALLBACK_IMAGE}'">
         <div class="flex-grow-1">
-          <h6 class="mb-1 text-truncate fw-bold" style="max-width: 180px;" title="₹{prod.name}">₹{prod.name}</h6>
-          <div class="text-purple fw-semibold small mb-2">₹₹{prod.price.toFixed(2)}</div>
-          <button class="btn btn-sm btn-outline-purple py-1 px-2" onclick="moveWishlistToCart(₹{prod.id})">
+          <h6 class="mb-1 text-truncate fw-bold" style="max-width: 180px;" title="${prod.name}">${prod.name}</h6>
+          <div class="text-purple fw-semibold small mb-2">$${prod.price.toFixed(2)}</div>
+          <button class="btn btn-sm btn-outline-purple py-1 px-2" onclick="moveWishlistToCart(${prod.id})">
             <i class="bi bi-cart-plus me-1"></i> Move to Cart
           </button>
         </div>
         <div>
-          <button class="btn btn-sm text-danger p-0" title="Remove" onclick="toggleWishlist(₹{prod.id})">
+          <button class="btn btn-sm text-danger p-0" title="Remove" onclick="toggleWishlist(${prod.id})">
             <i class="bi bi-trash3 fs-6"></i>
           </button>
         </div>
@@ -1632,7 +1632,7 @@ function initSmartPicksDefaults() {
   const slider = document.getElementById("smartBudgetSlider");
   const val = document.getElementById("smartBudgetValue");
   if (slider && val) {
-    val.textContent = `₹₹{slider.value}`;
+    val.textContent = `$${slider.value}`;
   }
 }
 
@@ -1661,20 +1661,20 @@ function generateSmartPicks() {
     // Purpose match
     if (prod.purpose && prod.purpose.includes(purpose)) {
       score += 35;
-      matchReasons.push(`Tailored for ₹{purpose}`);
+      matchReasons.push(`Tailored for ${purpose}`);
     }
 
     // Style match
     if (prod.style && prod.style.includes(style)) {
       score += 30;
-      matchReasons.push(`Matches ₹{style} style`);
+      matchReasons.push(`Matches ${style} style`);
     }
 
     // Category match
     if (category === "Any" || prod.category === category) {
       score += 25;
       if (category !== "Any") {
-        matchReasons.push(`Exact ₹{category} category`);
+        matchReasons.push(`Exact ${category} category`);
       }
     } else {
       score -= 40; // Penalize if user specifically chose another category
@@ -1683,7 +1683,7 @@ function generateSmartPicks() {
     // Budget weighting: Fits comfortably within budget
     if (prod.price <= maxBudget) {
       score += 20;
-      matchReasons.push(`Fits your ₹₹{maxBudget} budget`);
+      matchReasons.push(`Fits your $${maxBudget} budget`);
     } else {
       score -= 35; // Exceeds budget
     }
@@ -1720,27 +1720,27 @@ function generateSmartPicks() {
   // Render Feedback Summary Box
   if (feedbackContainer) {
     feedbackContainer.innerHTML = `
-      <div class="p-3 mb-4 rounded-3 border ₹{totalRecommendedPrice <= maxBudget ? 'border-purple bg-purple-subtle' : 'border-warning bg-warning-subtle'}">
+      <div class="p-3 mb-4 rounded-3 border ${totalRecommendedPrice <= maxBudget ? 'border-purple bg-purple-subtle' : 'border-warning bg-warning-subtle'}">
         <div class="row align-items-center">
           <div class="col-md-7">
             <h6 class="fw-bold mb-1">
-              <i class="bi bi-stars text-purple me-1"></i> Personalized Smart Picks for ₹{purpose} (₹{style} Style)
+              <i class="bi bi-stars text-purple me-1"></i> Personalized Smart Picks for ${purpose} (${style} Style)
             </h6>
             <p class="small text-muted mb-2">
-              Found ₹{primaryRecommendations.length} ideal product matches curated within your ₹₹{maxBudget} budget.
+              Found ${primaryRecommendations.length} ideal product matches curated within your $${maxBudget} budget.
             </p>
             <div class="d-flex gap-3 small fw-semibold">
-              <span>Total Cost: <strong class="text-purple">₹₹{totalRecommendedPrice.toFixed(2)}</strong></span>
-              <span>Remaining Budget: <strong class="text-success">₹₹{remainingBudget.toFixed(2)}</strong></span>
+              <span>Total Cost: <strong class="text-purple">$${totalRecommendedPrice.toFixed(2)}</strong></span>
+              <span>Remaining Budget: <strong class="text-success">$${remainingBudget.toFixed(2)}</strong></span>
             </div>
           </div>
           <div class="col-md-5 mt-3 mt-md-0">
             <div class="d-flex justify-content-between small text-muted mb-1">
               <span>Budget Utilized</span>
-              <span>₹{budgetUtilizationPct}%</span>
+              <span>${budgetUtilizationPct}%</span>
             </div>
             <div class="budget-progress-bar">
-              <div class="budget-progress-fill" style="width: ₹{budgetUtilizationPct}%;"></div>
+              <div class="budget-progress-fill" style="width: ${budgetUtilizationPct}%;"></div>
             </div>
           </div>
         </div>
@@ -1766,30 +1766,30 @@ function generateSmartPicks() {
         <div class="col-12 col-md-4">
           <div class="recommendation-card p-3 h-100 d-flex flex-column">
             <div class="d-flex justify-content-between align-items-center mb-2">
-              <span class="badge bg-purple-subtle text-purple">₹{prod.category}</span>
-              <span class="text-warning small fw-bold">★ ₹{prod.rating}</span>
+              <span class="badge bg-purple-subtle text-purple">${prod.category}</span>
+              <span class="text-warning small fw-bold">★ ${prod.rating}</span>
             </div>
 
             <div class="position-relative rounded overflow-hidden mb-3" style="height: 180px;">
-              <img src="₹{prod.image}" alt="₹{prod.name}" class="w-100 h-100 object-fit-cover" onerror="this.onerror=null; this.src='₹{FALLBACK_IMAGE}'">
+              <img src="${prod.image}" alt="${prod.name}" class="w-100 h-100 object-fit-cover" onerror="this.onerror=null; this.src='${FALLBACK_IMAGE}'">
             </div>
 
-            <h6 class="fw-bold mb-1 text-truncate" title="₹{prod.name}">₹{prod.name}</h6>
+            <h6 class="fw-bold mb-1 text-truncate" title="${prod.name}">${prod.name}</h6>
             <div class="match-reason-badge">
-              <i class="bi bi-check2-circle me-1"></i> ₹{item.matchReason}
+              <i class="bi bi-check2-circle me-1"></i> ${item.matchReason}
             </div>
 
             <div class="mt-auto">
               <div class="d-flex justify-content-between align-items-baseline mb-3">
-                <span class="fs-5 fw-bold text-purple">₹₹{prod.price.toFixed(2)}</span>
-                <span class="text-muted text-decoration-line-through small">₹₹{prod.originalPrice.toFixed(2)}</span>
+                <span class="fs-5 fw-bold text-purple">$${prod.price.toFixed(2)}</span>
+                <span class="text-muted text-decoration-line-through small">$${prod.originalPrice.toFixed(2)}</span>
               </div>
               <div class="d-grid gap-2">
-                <button class="btn btn-purple btn-sm" onclick="addToCart(₹{prod.id}, 1, event)">
+                <button class="btn btn-purple btn-sm" onclick="addToCart(${prod.id}, 1, event)">
                   <i class="bi bi-cart-plus me-1"></i> Add to Cart
                 </button>
-                <button class="btn btn-sm btn-outline-secondary" onclick="toggleWishlist(₹{prod.id}, event)">
-                  <i class="bi ₹{isWishlisted ? 'bi-heart-fill text-danger' : 'bi-heart'} me-1"></i> Wishlist
+                <button class="btn btn-sm btn-outline-secondary" onclick="toggleWishlist(${prod.id}, event)">
+                  <i class="bi ${isWishlisted ? 'bi-heart-fill text-danger' : 'bi-heart'} me-1"></i> Wishlist
                 </button>
               </div>
             </div>
@@ -1808,16 +1808,16 @@ function generateSmartPicks() {
           <i class="bi bi-lightning-charge-fill text-warning me-1"></i> Affordable Pocket-Friendly Alternatives
         </h6>
       </div>
-      ₹{affordableAlternatives.map(item => `
+      ${affordableAlternatives.map(item => `
         <div class="col-12 col-md-6">
           <div class="p-2 border rounded d-flex align-items-center gap-3 bg-surface">
-            <img src="₹{item.product.image}" class="rounded" style="width: 60px; height: 60px; object-fit: cover;" onerror="this.onerror=null; this.src='₹{FALLBACK_IMAGE}'">
+            <img src="${item.product.image}" class="rounded" style="width: 60px; height: 60px; object-fit: cover;" onerror="this.onerror=null; this.src='${FALLBACK_IMAGE}'">
             <div class="flex-grow-1">
-              <h6 class="mb-0 small fw-bold text-truncate" style="max-width: 200px;">₹{item.product.name}</h6>
-              <span class="text-purple small fw-bold">₹₹{item.product.price.toFixed(2)}</span>
-              <span class="badge bg-secondary small ms-1">₹{item.product.category}</span>
+              <h6 class="mb-0 small fw-bold text-truncate" style="max-width: 200px;">${item.product.name}</h6>
+              <span class="text-purple small fw-bold">$${item.product.price.toFixed(2)}</span>
+              <span class="badge bg-secondary small ms-1">${item.product.category}</span>
             </div>
-            <button class="btn btn-sm btn-soft px-3" onclick="addToCart(₹{item.product.id}, 1, event)">
+            <button class="btn btn-sm btn-soft px-3" onclick="addToCart(${item.product.id}, 1, event)">
               <i class="bi bi-plus-lg"></i>
             </button>
           </div>
@@ -1846,23 +1846,23 @@ function openProductModal(productId) {
   document.getElementById("modalProductImage").src = prod.image;
   document.getElementById("modalProductCategory").textContent = prod.category;
   document.getElementById("modalProductTitle").textContent = prod.name;
-  document.getElementById("modalProductRating").textContent = `★ ₹{prod.rating} (₹{prod.reviews} customer reviews)`;
-  document.getElementById("modalProductPrice").textContent = `₹₹{prod.price.toFixed(2)}`;
-  document.getElementById("modalProductOriginalPrice").textContent = `₹₹{prod.originalPrice.toFixed(2)}`;
-  document.getElementById("modalProductDiscount").textContent = `₹{discountPct}% OFF`;
+  document.getElementById("modalProductRating").textContent = `★ ${prod.rating} (${prod.reviews} customer reviews)`;
+  document.getElementById("modalProductPrice").textContent = `$${prod.price.toFixed(2)}`;
+  document.getElementById("modalProductOriginalPrice").textContent = `$${prod.originalPrice.toFixed(2)}`;
+  document.getElementById("modalProductDiscount").textContent = `${discountPct}% OFF`;
   document.getElementById("modalProductDescription").textContent = prod.description;
 
   // Features list
   const featuresList = document.getElementById("modalProductFeatures");
   if (featuresList && prod.features) {
-    featuresList.innerHTML = prod.features.map(f => `<li><i class="bi bi-check2 text-purple me-2"></i>₹{f}</li>`).join("");
+    featuresList.innerHTML = prod.features.map(f => `<li><i class="bi bi-check2 text-purple me-2"></i>${f}</li>`).join("");
   }
 
   // Tags
   const tagsContainer = document.getElementById("modalProductTags");
   if (tagsContainer) {
-    const styleTags = (prod.style || []).map(s => `<span class="badge bg-purple-subtle text-purple me-1">₹{s}</span>`).join("");
-    const purposeTags = (prod.purpose || []).map(p => `<span class="badge bg-secondary me-1">₹{p}</span>`).join("");
+    const styleTags = (prod.style || []).map(s => `<span class="badge bg-purple-subtle text-purple me-1">${s}</span>`).join("");
+    const purposeTags = (prod.purpose || []).map(p => `<span class="badge bg-secondary me-1">${p}</span>`).join("");
     tagsContainer.innerHTML = styleTags + purposeTags;
   }
 
@@ -1884,11 +1884,11 @@ function openProductModal(productId) {
   // Modal Wishlist Button action
   const modalWishlistBtn = document.getElementById("modalWishlistBtn");
   if (modalWishlistBtn) {
-    modalWishlistBtn.innerHTML = `<i class="bi ₹{isWishlisted ? 'bi-heart-fill text-danger' : 'bi-heart'} me-1"></i> ₹{isWishlisted ? 'Saved in Wishlist' : 'Add to Wishlist'}`;
+    modalWishlistBtn.innerHTML = `<i class="bi ${isWishlisted ? 'bi-heart-fill text-danger' : 'bi-heart'} me-1"></i> ${isWishlisted ? 'Saved in Wishlist' : 'Add to Wishlist'}`;
     modalWishlistBtn.onclick = () => {
       toggleWishlist(prod.id);
       const updatedWishlisted = STATE.wishlist.includes(prod.id);
-      modalWishlistBtn.innerHTML = `<i class="bi ₹{updatedWishlisted ? 'bi-heart-fill text-danger' : 'bi-heart'} me-1"></i> ₹{updatedWishlisted ? 'Saved in Wishlist' : 'Add to Wishlist'}`;
+      modalWishlistBtn.innerHTML = `<i class="bi ${updatedWishlisted ? 'bi-heart-fill text-danger' : 'bi-heart'} me-1"></i> ${updatedWishlisted ? 'Saved in Wishlist' : 'Add to Wishlist'}`;
     };
   }
 
@@ -1927,17 +1927,17 @@ function openCheckoutModal() {
       if (!prod) return "";
       return `
         <div class="d-flex justify-content-between small text-muted mb-1">
-          <span>₹{prod.name} × ₹{item.quantity}</span>
-          <span class="fw-semibold text-main">₹₹{(prod.price * item.quantity).toFixed(2)}</span>
+          <span>${prod.name} × ${item.quantity}</span>
+          <span class="fw-semibold text-main">$${(prod.price * item.quantity).toFixed(2)}</span>
         </div>
       `;
     }).join("");
   }
 
-  if (summarySubtotal) summarySubtotal.textContent = `₹₹{subtotal.toFixed(2)}`;
-  if (summaryDiscount) summaryDiscount.textContent = discount > 0 ? `-₹₹{discount.toFixed(2)}` : "₹0.00";
-  if (summaryDelivery) summaryDelivery.textContent = delivery === 0 ? "FREE" : `₹₹{delivery.toFixed(2)}`;
-  if (summaryTotal) summaryTotal.textContent = `₹₹{total.toFixed(2)}`;
+  if (summarySubtotal) summarySubtotal.textContent = `$${subtotal.toFixed(2)}`;
+  if (summaryDiscount) summaryDiscount.textContent = discount > 0 ? `-$${discount.toFixed(2)}` : "$0.00";
+  if (summaryDelivery) summaryDelivery.textContent = delivery === 0 ? "FREE" : `$${delivery.toFixed(2)}`;
+  if (summaryTotal) summaryTotal.textContent = `$${total.toFixed(2)}`;
 
   const checkoutModalEl = document.getElementById("checkoutModal");
   if (checkoutModalEl) {
@@ -1962,7 +1962,7 @@ function handleCheckoutSubmission(e) {
     return;
   }
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+₹/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     showToast("Please provide a valid email address.", "warning");
     return;
@@ -1975,7 +1975,7 @@ function handleCheckoutSubmission(e) {
 
   // Calculate snapshot of completed order
   const { subtotal, discount, delivery, total } = calculateCartTotals();
-  const orderNumber = `QB-₹{new Date().getFullYear()}-₹{Math.floor(10000 + Math.random() * 90000)}`;
+  const orderNumber = `QB-${new Date().getFullYear()}-${Math.floor(10000 + Math.random() * 90000)}`;
 
   // Estimated delivery: 3 to 4 business days from today
   const deliveryDate = new Date();
@@ -2001,8 +2001,8 @@ function handleCheckoutSubmission(e) {
   document.getElementById("confirmOrderNumber").textContent = orderNumber;
   document.getElementById("confirmDeliveryDate").textContent = deliveryDateStr;
   document.getElementById("confirmCustomerName").textContent = name;
-  document.getElementById("confirmCustomerAddress").textContent = `₹{address}, ₹{city} - ₹{postal}`;
-  document.getElementById("confirmOrderTotal").textContent = `₹₹{total.toFixed(2)}`;
+  document.getElementById("confirmCustomerAddress").textContent = `${address}, ${city} - ${postal}`;
+  document.getElementById("confirmOrderTotal").textContent = `$${total.toFixed(2)}`;
 
   // Empty cart and persistent state
   STATE.cart = [];
