@@ -8,6 +8,7 @@
 
   <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -128,7 +129,7 @@
 
           <!-- Quick Stats / Highlights -->
           <div class="d-flex gap-4 justify-content-center justify-content-lg-start text-muted small pt-2">
-            <div><i class="bi bi-check2-circle text-purple me-1"></i> 48+ Premium Items</div>
+            <div><i class="bi bi-check2-circle text-purple me-1"></i> 48+ Products Across Categories</div>
             <div><i class="bi bi-check2-circle text-purple me-1"></i> Instant Filters</div>
             <div><i class="bi bi-check2-circle text-purple me-1"></i> LocalStorage Saved</div>
           </div>
@@ -243,7 +244,7 @@
               <i class="bi bi-truck"></i>
             </div>
             <h6 class="fw-bold mb-1">Free Delivery</h6>
-            <p class="text-muted small mb-0">On all orders over $50</p>
+            <p class="text-muted small mb-0">On all orders over ₹50</p>
           </div>
         </div>
         <div class="col-6 col-md-3">
@@ -432,13 +433,13 @@
                   <label for="smartBudgetSlider" class="form-label mb-0">
                     <i class="bi bi-cash-stack me-1"></i> Maximum Budget
                   </label>
-                  <span id="smartBudgetValue" class="budget-slider-display">$120</span>
+                  <span id="smartBudgetValue" class="budget-slider-display">₹5,000</span>
                 </div>
-                <input type="range" class="form-range" id="smartBudgetSlider" min="30" max="250" step="10" value="120">
+                <input type="range" class="form-range" id="smartBudgetSlider" min="30" max="100000" step="100" value="5000">
                 <div class="d-flex justify-content-between small text-muted">
-                  <span>$30</span>
-                  <span>$140</span>
-                  <span>$250</span>
+                  <span>₹30</span>
+                  <span>₹50000</span>
+                  <span>₹100000</span>
                 </div>
               </div>
 
@@ -539,9 +540,9 @@
             <div class="col-12 col-sm-6 col-md-4">
               <div class="d-flex justify-content-between align-items-center mb-1">
                 <label for="priceRangeInput" class="form-label mb-0 small fw-bold">Max Price</label>
-                <span class="fw-bold text-purple" id="priceRangeValue">$150</span>
+                <span class="fw-bold text-purple" id="priceRangeValue">₹1,00,000</span>
               </div>
-              <input type="range" class="form-range" id="priceRangeInput" min="20" max="150" step="5" value="150">
+              <input type="range" class="form-range" id="priceRangeInput" min="30" max="100000" step="100" value="100000">
             </div>
 
             <!-- Sorting Dropdown -->
@@ -589,7 +590,7 @@
             <span class="badge bg-light text-purple fw-bold px-3 py-1 mb-3">Limited Student & College Offer</span>
             <h2 class="display-6 fw-bold mb-2">Get 10% Off Everything in Your Cart!</h2>
             <p class="mb-4 text-white-50 fs-6">
-              Use our exclusive discount coupon at checkout. Valid on all products with free shipping on orders over $50!
+              Use our exclusive discount coupon at checkout. Valid on all products with free shipping on orders over ₹999!
             </p>
             <div class="d-inline-flex align-items-center gap-3 flex-wrap">
               <div class="coupon-badge" onclick="copyCouponCode('QUICK10')" title="Click to copy code">
@@ -625,7 +626,7 @@
           <div class="card h-100 border p-4 bg-surface shadow-sm">
             <div class="text-warning mb-2">★★★★★</div>
             <p class="text-muted small mb-3">
-              "The Smart Picks feature recommended the anti-theft backpack and wireless headphones right within my $120 college budget. Super fast and accurate!"
+              "The Smart Picks feature recommended the anti-theft backpack and wireless headphones right within my ₹120 college budget. Super fast and accurate!"
             </p>
             <div class="d-flex align-items-center gap-3">
               <div class="brand-icon-box" style="width: 36px; height: 36px; font-size: 0.9rem;">
@@ -745,7 +746,7 @@
               </h2>
               <div id="faqCollapseFour" class="accordion-collapse collapse" aria-labelledby="faqHeadingFour" data-bs-parent="#quickbuyFaqAccordion">
                 <div class="accordion-body small text-muted">
-                  Delivery is completely <strong>FREE</strong> for all orders with a subtotal of $50.00 or more. For orders below $50.00, a standard shipping fee of $5.00 is applied. The cart drawer features a live Bootstrap progress bar that shows how much more you need to add to unlock free shipping.
+                  Delivery is completely <strong>FREE</strong> for all orders with a subtotal of ₹50.00 or more. For orders below ₹50.00, a standard shipping fee of ₹5.00 is applied. The cart drawer features a live Bootstrap progress bar that shows how much more you need to add to unlock free shipping.
                 </div>
               </div>
             </div>
@@ -838,7 +839,7 @@
       <!-- Bootstrap 5 Free Delivery Progress Bar -->
       <div class="p-2 mb-2 rounded border bg-secondary" id="shippingProgressBox">
         <div class="d-flex justify-content-between align-items-center small mb-1">
-          <span id="shippingProgressText" class="fw-semibold">Add $50.00 more for FREE Delivery</span>
+          <span id="shippingProgressText" class="fw-semibold">Add ₹50.00 more for FREE Delivery</span>
           <span id="shippingProgressBadge" class="badge bg-purple-subtle text-purple">0%</span>
         </div>
         <div class="progress" style="height: 6px;">
@@ -874,20 +875,20 @@
         <div class="cart-summary-card mb-3">
           <div class="cart-summary-line">
             <span class="text-muted">Subtotal</span>
-            <span class="fw-bold" id="cartSubtotalAmount">$0.00</span>
+            <span class="fw-bold" id="cartSubtotalAmount">₹0.00</span>
           </div>
           <div class="cart-summary-line d-none" id="cartDiscountRow">
             <span class="text-success"><i class="bi bi-tag-fill me-1"></i> Discount (10%)</span>
-            <span class="text-success fw-bold" id="cartDiscountAmount">-$0.00</span>
+            <span class="text-success fw-bold" id="cartDiscountAmount">-₹0.00</span>
           </div>
           <div class="cart-summary-line">
             <span class="text-muted">Delivery Charges</span>
-            <span class="fw-bold" id="cartDeliveryAmount">$0.00</span>
+            <span class="fw-bold" id="cartDeliveryAmount">₹0.00</span>
           </div>
           <div class="border-top my-2"></div>
           <div class="d-flex justify-content-between fs-5 fw-bold">
             <span>Total</span>
-            <span class="text-purple" id="cartTotalAmount">$0.00</span>
+            <span class="text-purple" id="cartTotalAmount">₹0.00</span>
           </div>
         </div>
 
@@ -958,8 +959,8 @@
 
               <!-- Price Row -->
               <div class="d-flex align-items-baseline gap-2 mb-3">
-                <span class="fs-3 fw-bold text-purple" id="modalProductPrice">$0.00</span>
-                <span class="text-muted text-decoration-line-through" id="modalProductOriginalPrice">$0.00</span>
+                <span class="fs-3 fw-bold text-purple" id="modalProductPrice">₹0.00</span>
+                <span class="text-muted text-decoration-line-through" id="modalProductOriginalPrice">₹0.00</span>
                 <span class="badge bg-success-subtle text-success fw-bold" id="modalProductDiscount">10% OFF</span>
               </div>
 
@@ -1083,11 +1084,11 @@
                 <div class="card bg-surface border p-3">
                   <div class="d-flex justify-content-between small text-muted mb-1">
                     <span>Subtotal</span>
-                    <span id="checkoutSummarySubtotal">$0.00</span>
+                    <span id="checkoutSummarySubtotal">₹0.00</span>
                   </div>
                   <div class="d-flex justify-content-between small text-success mb-1">
                     <span>Coupon Discount</span>
-                    <span id="checkoutSummaryDiscount">$0.00</span>
+                    <span id="checkoutSummaryDiscount">₹0.00</span>
                   </div>
                   <div class="d-flex justify-content-between small text-muted mb-2">
                     <span>Delivery</span>
@@ -1096,7 +1097,7 @@
                   <div class="border-top my-1"></div>
                   <div class="d-flex justify-content-between fw-bold fs-6 pt-1">
                     <span>Total Payable</span>
-                    <span class="text-purple" id="checkoutSummaryTotal">$0.00</span>
+                    <span class="text-purple" id="checkoutSummaryTotal">₹0.00</span>
                   </div>
                 </div>
 
@@ -1156,7 +1157,7 @@
             <div class="border-top my-2"></div>
             <div class="d-flex justify-content-between fs-6 fw-bold">
               <span>Amount Paid:</span>
-              <span class="text-purple" id="confirmOrderTotal">$0.00</span>
+              <span class="text-purple" id="confirmOrderTotal">₹0.00</span>
             </div>
           </div>
 
