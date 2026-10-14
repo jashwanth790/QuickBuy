@@ -17,7 +17,7 @@ const PRODUCTS = [
     name: "Classic Heavyweight Cotton Hoodie",
     category: "Clothing",
     
-    price:₹ 49.99,
+    price:49.99,
     originalPrice: 69.99,
     rating: 4.8,
     reviews: 142,
