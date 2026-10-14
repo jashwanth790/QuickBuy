@@ -910,12 +910,12 @@ function initUserAuthUI() {
       <div class="dropdown">
         <button class="btn btn-sm btn-soft d-inline-flex align-items-center gap-1 dropdown-toggle py-1 px-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="bi bi-person-circle text-purple fs-6"></i>
-          <span class="small fw-bold d-none d-sm-inline">₹{firstName}</span>
+          <span class="small fw-bold d-none d-sm-inline">${firstName}</span>
         </button>
         <ul class="dropdown-menu dropdown-menu-end shadow border">
           <li class="px-3 py-1 border-bottom small">
-            <div class="fw-bold text-main">₹{currentUser.name}</div>
-            <div class="text-muted" style="font-size: 0.75rem;">₹{currentUser.email}</div>
+            <div class="fw-bold text-main">${currentUser.name}</div>
+            <div class="text-muted" style="font-size: 0.75rem;">${currentUser.email}</div>
           </li>
           <li>
             <a class="dropdown-item small py-2 d-flex align-items-center gap-2" href="javascript:void(0)" onclick="showToast('Your account is active and verified!', 'info')">
