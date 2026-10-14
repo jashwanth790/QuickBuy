@@ -6,6 +6,16 @@
  * ==============================================================================
  */
 
+function formatPrice(price) {
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(price);
+}
+
+
 // ------------------------------------------------------------------------------
 // 1. Product Database (24 Realistic Sample Products across 6 Categories)
 // ------------------------------------------------------------------------------
@@ -17,7 +27,7 @@ const PRODUCTS = [
     name: "Classic Heavyweight Cotton Hoodie",
     category: "Clothing",
     
-    price:49.99,
+    price: 49.99,
     originalPrice: 69.99,
     rating: 4.8,
     reviews: 142,
@@ -967,7 +977,7 @@ function initTheme() {
       if (themeIcon) {
         themeIcon.className = STATE.theme === "dark" ? "bi bi-sun-fill text-warning" : "bi bi-moon-stars-fill text-purple";
       }
-      showToast(`Switched to ₹{STATE.theme === "dark" ? "Dark" : "Light"} Mode!`, "info");
+      showToast(`Switched to ${STATE.theme === "dark" ? "Dark" : "Light"} Mode!`, "info");
     });
   }
 }
@@ -1118,8 +1128,9 @@ function renderProducts() {
             <p class="text-muted small text-truncate mb-2">${prod.shortDesc}</p>
 
             <div class="product-price-row">
-              <span class="product-price">$${prod.price.toFixed(2)}</span>
-              <span class="product-original-price">$${prod.originalPrice.toFixed(2)}</span>
+            <span class="product-price">${formatPrice(prod.price)}</span>
+<span class="product-original-price">${formatPrice(prod.originalPrice)}</span>
+             
               <span class="product-discount-pill">${discountPct}% OFF</span>
             </div>
 
@@ -1190,7 +1201,7 @@ function setupEventListeners() {
   if (priceRange && priceValueDisplay) {
     priceRange.addEventListener("input", (e) => {
       STATE.filters.maxPrice = parseFloat(e.target.value);
-      priceValueDisplay.textContent = `$${STATE.filters.maxPrice}`;
+      priceValueDisplay.textContent = formatPrice(STATE.filters.maxPrice);
       renderProducts();
     });
   }
@@ -1227,7 +1238,7 @@ function setupEventListeners() {
   const smartBudgetValue = document.getElementById("smartBudgetValue");
   if (smartBudgetSlider && smartBudgetValue) {
     smartBudgetSlider.addEventListener("input", (e) => {
-      smartBudgetValue.textContent = `$${e.target.value}`;
+      smartBudgetValue.textContent = formatPrice(Number(e.target.value));
     });
   }
 }
@@ -1248,7 +1259,7 @@ function resetFilters() {
   const priceRange = document.getElementById("priceRangeInput");
   const priceValueDisplay = document.getElementById("priceRangeValue");
   if (priceRange) priceRange.value = 150;
-  if (priceValueDisplay) priceValueDisplay.textContent = "$150";
+  if (priceValueDisplay) priceValueDisplay.textContent = formatPrice(150);
 
   const sortSelect = document.getElementById("sortSelect");
   if (sortSelect) sortSelect.value = "featured";
@@ -1378,7 +1389,7 @@ function calculateCartTotals() {
     discount = (subtotal * COUPONS[STATE.couponApplied].discountPct) / 100;
   }
 
-  // Delivery: Free if subtotal > $50, else $5.00 flat fee (or $0 if cart is empty)
+  // Delivery: Free if subtotal >= 50, else 5.00 flat fee (or 0 if cart is empty)
   const delivery = subtotal === 0 ? 0 : (subtotal >= 50 ? 0 : 5.00);
   const total = Math.max(0, subtotal - discount + delivery);
 
@@ -1430,7 +1441,7 @@ function updateCartUI() {
         <img src="${prod.image}" alt="${prod.name}" class="cart-item-thumb" onerror="this.onerror=null; this.src='${FALLBACK_IMAGE}'">
         <div class="flex-grow-1">
           <h6 class="mb-1 text-truncate fw-bold" style="max-width: 170px;" title="${prod.name}">${prod.name}</h6>
-          <div class="text-purple fw-semibold small mb-2">$${prod.price.toFixed(2)} each</div>
+          <div class="text-purple fw-semibold small mb-2">${formatPrice(prod.price)} each</div>
           <div class="qty-control">
             <button class="qty-btn" onclick="updateCartQuantity(${prod.id}, -1)">-</button>
             <span class="qty-number">${item.quantity}</span>
@@ -1438,7 +1449,7 @@ function updateCartUI() {
           </div>
         </div>
         <div class="text-end">
-          <div class="fw-bold fs-6 mb-2">$${itemTotal}</div>
+          <div class="fw-bold fs-6 mb-2">${formatPrice(Number(itemTotal))}</div>
           <button class="btn btn-sm text-danger p-0" title="Remove item" onclick="removeFromCart(${prod.id})">
             <i class="bi bi-trash3 fs-6"></i>
           </button>
@@ -1448,12 +1459,12 @@ function updateCartUI() {
   }).join("");
 
   // Update Financials
-  if (subtotalEl) subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+  if (subtotalEl) subtotalEl.textContent = formatPrice(subtotal);
   
   if (discountRow && discountEl) {
     if (discount > 0) {
       discountRow.classList.remove("d-none");
-      discountEl.textContent = `-$${discount.toFixed(2)}`;
+      discountEl.textContent = `-${formatPrice(discount)}`;
     } else {
       discountRow.classList.add("d-none");
     }
@@ -1462,10 +1473,10 @@ function updateCartUI() {
   if (deliveryEl) {
     deliveryEl.innerHTML = delivery === 0 
       ? '<span class="text-success fw-bold">FREE</span>' 
-      : `$${delivery.toFixed(2)}`;
+      : formatPrice(delivery);
   }
 
-  if (totalEl) totalEl.textContent = `$${total.toFixed(2)}`;
+  if (totalEl) totalEl.textContent = formatPrice(total);
 
   // Bootstrap 5 Shipping Progress Bar Update
   const progressBar = document.getElementById("shippingProgressBar");
@@ -1484,7 +1495,7 @@ function updateCartUI() {
       const needed = (50 - subtotal).toFixed(2);
       progressBar.style.width = `${pct}%`;
       progressBar.className = "progress-bar bg-purple";
-      progressText.innerHTML = `Add <strong>$${needed}</strong> more for FREE Delivery`;
+      progressText.innerHTML = `Add <strong>${formatPrice(Number(needed))}</strong> more for FREE Delivery`;
       progressBadge.className = "badge bg-purple-subtle text-purple";
       progressBadge.textContent = `${pct}%`;
     }
@@ -1605,7 +1616,7 @@ function updateWishlistUI() {
         <img src="${prod.image}" alt="${prod.name}" class="cart-item-thumb" onerror="this.onerror=null; this.src='${FALLBACK_IMAGE}'">
         <div class="flex-grow-1">
           <h6 class="mb-1 text-truncate fw-bold" style="max-width: 180px;" title="${prod.name}">${prod.name}</h6>
-          <div class="text-purple fw-semibold small mb-2">$${prod.price.toFixed(2)}</div>
+          <div class="text-purple fw-semibold small mb-2">${formatPrice(prod.price)}</div>
           <button class="btn btn-sm btn-outline-purple py-1 px-2" onclick="moveWishlistToCart(${prod.id})">
             <i class="bi bi-cart-plus me-1"></i> Move to Cart
           </button>
@@ -1632,7 +1643,7 @@ function initSmartPicksDefaults() {
   const slider = document.getElementById("smartBudgetSlider");
   const val = document.getElementById("smartBudgetValue");
   if (slider && val) {
-    val.textContent = `$${slider.value}`;
+    val.textContent = formatPrice(Number(slider.value));
   }
 }
 
@@ -1683,7 +1694,7 @@ function generateSmartPicks() {
     // Budget weighting: Fits comfortably within budget
     if (prod.price <= maxBudget) {
       score += 20;
-      matchReasons.push(`Fits your $${maxBudget} budget`);
+      matchReasons.push(`Fits your ${formatPrice(maxBudget)} budget`);
     } else {
       score -= 35; // Exceeds budget
     }
@@ -1727,11 +1738,11 @@ function generateSmartPicks() {
               <i class="bi bi-stars text-purple me-1"></i> Personalized Smart Picks for ${purpose} (${style} Style)
             </h6>
             <p class="small text-muted mb-2">
-              Found ${primaryRecommendations.length} ideal product matches curated within your $${maxBudget} budget.
+              Found ${primaryRecommendations.length} ideal product matches curated within your ${formatPrice(maxBudget)} budget.
             </p>
             <div class="d-flex gap-3 small fw-semibold">
-              <span>Total Cost: <strong class="text-purple">$${totalRecommendedPrice.toFixed(2)}</strong></span>
-              <span>Remaining Budget: <strong class="text-success">$${remainingBudget.toFixed(2)}</strong></span>
+              <span>Total Cost: <strong class="text-purple">${formatPrice(totalRecommendedPrice)}</strong></span>
+              <span>Remaining Budget: <strong class="text-success">${formatPrice(remainingBudget)}</strong></span>
             </div>
           </div>
           <div class="col-md-5 mt-3 mt-md-0">
@@ -1781,8 +1792,8 @@ function generateSmartPicks() {
 
             <div class="mt-auto">
               <div class="d-flex justify-content-between align-items-baseline mb-3">
-                <span class="fs-5 fw-bold text-purple">$${prod.price.toFixed(2)}</span>
-                <span class="text-muted text-decoration-line-through small">$${prod.originalPrice.toFixed(2)}</span>
+                <span class="fs-5 fw-bold text-purple">${formatPrice(prod.price)}</span>
+                <span class="text-muted text-decoration-line-through small">${formatPrice(prod.originalPrice)}</span>
               </div>
               <div class="d-grid gap-2">
                 <button class="btn btn-purple btn-sm" onclick="addToCart(${prod.id}, 1, event)">
@@ -1814,7 +1825,7 @@ function generateSmartPicks() {
             <img src="${item.product.image}" class="rounded" style="width: 60px; height: 60px; object-fit: cover;" onerror="this.onerror=null; this.src='${FALLBACK_IMAGE}'">
             <div class="flex-grow-1">
               <h6 class="mb-0 small fw-bold text-truncate" style="max-width: 200px;">${item.product.name}</h6>
-              <span class="text-purple small fw-bold">$${item.product.price.toFixed(2)}</span>
+              <span class="text-purple small fw-bold">${formatPrice(item.product.price)}</span>
               <span class="badge bg-secondary small ms-1">${item.product.category}</span>
             </div>
             <button class="btn btn-sm btn-soft px-3" onclick="addToCart(${item.product.id}, 1, event)">
@@ -1847,8 +1858,8 @@ function openProductModal(productId) {
   document.getElementById("modalProductCategory").textContent = prod.category;
   document.getElementById("modalProductTitle").textContent = prod.name;
   document.getElementById("modalProductRating").textContent = `★ ${prod.rating} (${prod.reviews} customer reviews)`;
-  document.getElementById("modalProductPrice").textContent = `$${prod.price.toFixed(2)}`;
-  document.getElementById("modalProductOriginalPrice").textContent = `$${prod.originalPrice.toFixed(2)}`;
+  document.getElementById("modalProductPrice").textContent = formatPrice(prod.price);
+  document.getElementById("modalProductOriginalPrice").textContent = formatPrice(prod.originalPrice);
   document.getElementById("modalProductDiscount").textContent = `${discountPct}% OFF`;
   document.getElementById("modalProductDescription").textContent = prod.description;
 
@@ -1928,16 +1939,16 @@ function openCheckoutModal() {
       return `
         <div class="d-flex justify-content-between small text-muted mb-1">
           <span>${prod.name} × ${item.quantity}</span>
-          <span class="fw-semibold text-main">$${(prod.price * item.quantity).toFixed(2)}</span>
+          <span class="fw-semibold text-main">${formatPrice(prod.price * item.quantity)}</span>
         </div>
       `;
     }).join("");
   }
 
-  if (summarySubtotal) summarySubtotal.textContent = `$${subtotal.toFixed(2)}`;
-  if (summaryDiscount) summaryDiscount.textContent = discount > 0 ? `-$${discount.toFixed(2)}` : "$0.00";
-  if (summaryDelivery) summaryDelivery.textContent = delivery === 0 ? "FREE" : `$${delivery.toFixed(2)}`;
-  if (summaryTotal) summaryTotal.textContent = `$${total.toFixed(2)}`;
+  if (summarySubtotal) summarySubtotal.textContent = formatPrice(subtotal);
+  if (summaryDiscount) summaryDiscount.textContent = discount > 0 ? `-${formatPrice(discount)}` : formatPrice(0);
+  if (summaryDelivery) summaryDelivery.textContent = delivery === 0 ? "FREE" : formatPrice(delivery);
+  if (summaryTotal) summaryTotal.textContent = formatPrice(total);
 
   const checkoutModalEl = document.getElementById("checkoutModal");
   if (checkoutModalEl) {
@@ -2002,7 +2013,7 @@ function handleCheckoutSubmission(e) {
   document.getElementById("confirmDeliveryDate").textContent = deliveryDateStr;
   document.getElementById("confirmCustomerName").textContent = name;
   document.getElementById("confirmCustomerAddress").textContent = `${address}, ${city} - ${postal}`;
-  document.getElementById("confirmOrderTotal").textContent = `$${total.toFixed(2)}`;
+  document.getElementById("confirmOrderTotal").textContent = formatPrice(total);
 
   // Empty cart and persistent state
   STATE.cart = [];
@@ -2018,14 +2029,5 @@ function handleCheckoutSubmission(e) {
   }
 
   showToast("Order placed successfully! Thank you for choosing QuickBuy.", "success");
-}
-
-function formatPrice(amount) {
-  return new Intl.NumberFormat("en-IN", {
-    style: "currency",
-    currency: "INR",
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  }).format(amount);
 }
 
