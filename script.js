@@ -6,6 +6,16 @@
  * ==============================================================================
  */
 
+function formatPrice(price) {
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }).format(price);
+}
+
+
 // ------------------------------------------------------------------------------
 // 1. Product Database (24 Realistic Sample Products across 6 Categories)
 // ------------------------------------------------------------------------------
@@ -17,7 +27,7 @@ const PRODUCTS = [
     name: "Classic Heavyweight Cotton Hoodie",
     category: "Clothing",
     
-    price:₹ 49.99,
+    price: 49.99,
     originalPrice: 69.99,
     rating: 4.8,
     reviews: 142,
@@ -1118,8 +1128,9 @@ function renderProducts() {
             <p class="text-muted small text-truncate mb-2">${prod.shortDesc}</p>
 
             <div class="product-price-row">
-              <span class="product-price">$${prod.price.toFixed(2)}</span>
-              <span class="product-original-price">$${prod.originalPrice.toFixed(2)}</span>
+            <span class="product-price">${formatPrice(prod.price)}</span>
+<span class="product-original-price">${formatPrice(prod.originalPrice)}</span>
+             
               <span class="product-discount-pill">${discountPct}% OFF</span>
             </div>
 
@@ -1814,7 +1825,7 @@ function generateSmartPicks() {
             <img src="${item.product.image}" class="rounded" style="width: 60px; height: 60px; object-fit: cover;" onerror="this.onerror=null; this.src='${FALLBACK_IMAGE}'">
             <div class="flex-grow-1">
               <h6 class="mb-0 small fw-bold text-truncate" style="max-width: 200px;">${item.product.name}</h6>
-              <span class="text-purple small fw-bold">$${item.product.price.toFixed(2)}</span>
+             <span class="text-purple small fw-bold">${formatPrice(item.product.price)}</span>
               <span class="badge bg-secondary small ms-1">${item.product.category}</span>
             </div>
             <button class="btn btn-sm btn-soft px-3" onclick="addToCart(${item.product.id}, 1, event)">
@@ -1847,8 +1858,12 @@ function openProductModal(productId) {
   document.getElementById("modalProductCategory").textContent = prod.category;
   document.getElementById("modalProductTitle").textContent = prod.name;
   document.getElementById("modalProductRating").textContent = `★ ${prod.rating} (${prod.reviews} customer reviews)`;
-  document.getElementById("modalProductPrice").textContent = `$${prod.price.toFixed(2)}`;
-  document.getElementById("modalProductOriginalPrice").textContent = `$${prod.originalPrice.toFixed(2)}`;
+  
+  document.getElementById("modalProductPrice").textContent =
+  formatPrice(prod.price);
+
+document.getElementById("modalProductOriginalPrice").textContent =
+  formatPrice(prod.originalPrice);
   document.getElementById("modalProductDiscount").textContent = `${discountPct}% OFF`;
   document.getElementById("modalProductDescription").textContent = prod.description;
 
@@ -1928,16 +1943,27 @@ function openCheckoutModal() {
       return `
         <div class="d-flex justify-content-between small text-muted mb-1">
           <span>${prod.name} × ${item.quantity}</span>
-          <span class="fw-semibold text-main">$${(prod.price * item.quantity).toFixed(2)}</span>
+
+          <span class="fw-semibold text-main">${formatPrice(prod.price * item.quantity)}</span>
         </div>
       `;
     }).join("");
   }
+  if (summarySubtotal) summarySubtotal.textContent = formatPrice(subtotal);
 
-  if (summarySubtotal) summarySubtotal.textContent = `$${subtotal.toFixed(2)}`;
-  if (summaryDiscount) summaryDiscount.textContent = discount > 0 ? `-$${discount.toFixed(2)}` : "$0.00";
-  if (summaryDelivery) summaryDelivery.textContent = delivery === 0 ? "FREE" : `$${delivery.toFixed(2)}`;
-  if (summaryTotal) summaryTotal.textContent = `$${total.toFixed(2)}`;
+if (summaryDiscount) {
+  summaryDiscount.textContent =
+    discount > 0 ? "-" + formatPrice(discount) : formatPrice(0);
+}
+
+if (summaryDelivery) {
+  summaryDelivery.textContent =
+    delivery === 0 ? "FREE" : formatPrice(delivery);
+}
+
+if (summaryTotal) summaryTotal.textContent = formatPrice(total);
+
+
 
   const checkoutModalEl = document.getElementById("checkoutModal");
   if (checkoutModalEl) {
@@ -2020,12 +2046,4 @@ function handleCheckoutSubmission(e) {
   showToast("Order placed successfully! Thank you for choosing QuickBuy.", "success");
 }
 
-function formatPrice(amount) {
-  return new Intl.NumberFormat("en-IN", {
-    style: "currency",
-    currency: "INR",
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  }).format(amount);
-}
 
