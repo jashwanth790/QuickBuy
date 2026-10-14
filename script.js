@@ -12,6 +12,7 @@
 const PRODUCTS = [
   // --- CLOTHING ---
   {
+    
     id: 1,
     name: "Classic Heavyweight Cotton Hoodie",
     category: "Clothing",
